@@ -1,0 +1,11 @@
+export { default as StarsRating } from './layout/stars-rating/stars-rating';
+export { default as OfferCard } from './layout/offer-card/offer-card';
+export { default as OfferList } from './layout/offer-list/offer-list';
+export { default as Header } from './layout/header/header';
+export { default as Footer } from './layout/footer/footer';
+export { default as CatalogFilter } from './layout/catalog-filter/catalog-filter';
+export { default as CatalogNavigation } from './layout/catalog-navigation/catalog-navigation';
+export { default as CatalogSort } from './layout/catalog-sort/catalog-sort';
+export { default as CatalogPagination } from './layout/catalog-pagination/catalog-pagination';
+export { default as CatalogMainSection } from './layout/catalog-main-section/catalog-main-section';
+export { default as Catalog } from './layout/catalog/catalog';
