@@ -8,3 +8,7 @@ export const getAllOffers = (state: State) => (
 export const getAllOffersIsLoaded = (state: State) => (
   state[StoreNameSpace.offers].isAllOffersLoaded
 );
+
+export const getAllOffersError = (state: State) => (
+  state[StoreNameSpace.offers].isAllOffersError
+);

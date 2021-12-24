@@ -6,4 +6,5 @@ export enum ApiRoute {
 
 export enum AppRoute {
   Main = '/',
+  Guitars= '/guitars',
 }

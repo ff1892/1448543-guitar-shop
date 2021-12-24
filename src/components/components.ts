@@ -2,6 +2,7 @@ export { default as StarsRating } from './layout/stars-rating/stars-rating';
 export { default as OfferCard } from './layout/offer-card/offer-card';
 export { default as OfferList } from './layout/offer-list/offer-list';
 export { default as Header } from './layout/header/header';
+export { default as SearchForm } from './layout/search-form/search-form';
 export { default as Footer } from './layout/footer/footer';
 export { default as CatalogFilter } from './layout/catalog-filter/catalog-filter';
 export { default as CatalogNavigation } from './layout/catalog-navigation/catalog-navigation';
@@ -11,3 +12,6 @@ export { default as CatalogMainSection } from './layout/catalog-main-section/cat
 export { default as Catalog } from './layout/catalog/catalog';
 export { default as Loader } from './layout/loader/loader';
 export { default as LoaderWrapper } from './layout/loader-wrapper/loader-wrapper';
+export { default as ErrorWrapper } from './layout/error-wrapper/error-wrapper';
+export { default as SvgSprite } from './layout/svg-sprite/svg-sprite';
+export { default as PageLayout } from './layout/page-layout/page-layout';

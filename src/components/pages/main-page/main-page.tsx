@@ -1,4 +1,5 @@
 import {
+  PageLayout,
   Header,
   Catalog,
   Footer
@@ -6,11 +7,11 @@ import {
 
 function MainPage(): JSX.Element {
   return (
-    <>
+    <PageLayout>
       <Header />
       <Catalog />
       <Footer />
-    </>
+    </PageLayout>
   );
 }
 

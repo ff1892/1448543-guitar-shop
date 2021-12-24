@@ -1,4 +1,4 @@
-import { loadAllOffers } from '../../actions';
+import { loadAllOffers, loadAllOffersError } from '../../actions';
 import { ApiRoute } from '../../../constants';
 import { Guitar } from '../../../types/data';
 import { ThunkActionResult } from '../../../types/action';
@@ -9,7 +9,7 @@ export const fetchAllOffersAction = (): ThunkActionResult =>
       const { data } = await api.get<Guitar[]>(ApiRoute.Guitars);
       dispatch(loadAllOffers(data));
     } catch {
-      // dispatch(loadAllOffers([]));
+      dispatch(loadAllOffersError());
     }
   };
 

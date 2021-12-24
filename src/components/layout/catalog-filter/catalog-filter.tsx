@@ -1,4 +1,12 @@
+import { useSelector } from 'react-redux';
+import { getAllOffers } from '../../../store/reducers/data-offers/selectors';
+import { getMinMaxPrice } from '../../../utils';
+
 function CatalogFilter (): JSX.Element {
+
+  const allOffers = useSelector(getAllOffers);
+  const { minPrice, maxPrice } = getMinMaxPrice(allOffers);
+
   return (
     <form className="catalog-filter">
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
@@ -7,11 +15,11 @@ function CatalogFilter (): JSX.Element {
         <div className="catalog-filter__price-range">
           <div className="form-input">
             <label className="visually-hidden">Минимальная цена</label>
-            <input type="number" placeholder="1 000" id="priceMin" name="от" />
+            <input type="number" placeholder={minPrice.toLocaleString()} id="priceMin" name="от" />
           </div>
           <div className="form-input">
             <label className="visually-hidden">Максимальная цена</label>
-            <input type="number" placeholder="30 000" id="priceMax" name="до" />
+            <input type="number" placeholder={maxPrice.toLocaleString()} id="priceMax" name="до" />
           </div>
         </div>
       </fieldset>

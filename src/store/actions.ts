@@ -8,3 +8,5 @@ export const loadAllOffers = createAction(
     payload: allOffers,
   }),
 );
+
+export const loadAllOffersError = createAction(ActionType.LoadAllOffersError);
