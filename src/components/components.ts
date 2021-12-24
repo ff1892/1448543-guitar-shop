@@ -9,3 +9,5 @@ export { default as CatalogSort } from './layout/catalog-sort/catalog-sort';
 export { default as CatalogPagination } from './layout/catalog-pagination/catalog-pagination';
 export { default as CatalogMainSection } from './layout/catalog-main-section/catalog-main-section';
 export { default as Catalog } from './layout/catalog/catalog';
+export { default as Loader } from './layout/loader/loader';
+export { default as LoaderWrapper } from './layout/loader-wrapper/loader-wrapper';
