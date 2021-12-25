@@ -13,6 +13,7 @@ function OfferCard({ offer }: OfferCardProps): JSX.Element {
     name,
     rating,
     price,
+    comments,
   } = offer;
 
   const formattedPrice = getFormattedPrice(price);
@@ -23,7 +24,9 @@ function OfferCard({ offer }: OfferCardProps): JSX.Element {
       <div className="product-card__info">
         <div className="rate product-card__rate" aria-hidden="true">
           <StarsRating rating={rating} />
-          <span className="rate__count">9</span>
+          <span className="rate__count">
+            { comments.length }
+          </span>
           <span className="rate__message"></span>
         </div>
         <p className="product-card__title">{name}</p>

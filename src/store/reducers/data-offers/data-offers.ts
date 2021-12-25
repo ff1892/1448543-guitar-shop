@@ -1,6 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DataOffers } from '../../../types/state';
-import { loadAllOffers, loadAllOffersError } from '../../actions';
+import {
+  loadAllOffers,
+  loadAllOffersError
+  // loadPartialOffers,
+  // loadPartialOffersError
+} from '../../actions';
 
 const initialState: DataOffers = {
   allOffers: [],

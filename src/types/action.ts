@@ -4,7 +4,7 @@ import { AxiosInstance } from 'axios';
 import { State } from '../types/state';
 
 export enum ActionType {
-  LoadAllOffers = 'data/LoadOffers',
+  LoadAllOffers = 'data/LoadAllOffers',
   LoadAllOffersError = 'data/LoadAllOffersError',
 }
 

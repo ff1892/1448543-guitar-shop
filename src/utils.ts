@@ -1,4 +1,6 @@
 import { Guitar } from './types/data';
+import { Sort } from './types/components';
+import { ButtonLabel } from './constants';
 
 export const getFormattedPrice = (price: number): string => (
   `${price.toLocaleString() } ₽`
@@ -23,4 +25,12 @@ export const getMinMaxPrice = (offers: Guitar[]) => {
   const minPrice = Math.min(...offers.map(({ price }) => price));
   const maxPrice = Math.max(...offers.map(({ price }) => price));
   return { minPrice, maxPrice };
+};
+
+export const getSortQuery = ({ type, order }: Sort): string => {
+  if (!(type && order)) {
+    return '';
+  }
+  const orderString = order === ButtonLabel.Ascending ? '' : '&_order=desc';
+  return `&_sort=${type}${orderString}`;
 };

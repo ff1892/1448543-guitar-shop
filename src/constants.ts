@@ -8,3 +8,14 @@ export enum AppRoute {
   Main = '/',
   Guitars= '/guitars',
 }
+
+export enum QueryRoute {
+  CommentsEmbed = '_embed=comments',
+}
+
+export enum ButtonLabel {
+  Price = 'price',
+  Rating = 'rating',
+  Ascending = 'asc',
+  Descending = 'desc',
+}
