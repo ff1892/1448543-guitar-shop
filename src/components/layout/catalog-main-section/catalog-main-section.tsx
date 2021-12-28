@@ -1,13 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllOffersAction } from '../../../store/api-actions/data-offers/data-offers';
-import { Sort } from '../../../types/components';
-import { getSortQuery } from '../../../utils';
+import { fetchAllOffersAction, fetchPriceOffersAction } from '../../../store/api-actions/data-offers/data-offers';
+import { getSortQuery, getQuery, getPriceQuery } from '../../../utils';
+import { getSort } from '../../../store/reducers/state-sort/selectors';
+import { getFilterType, getFilterStrings, getFilterPrice } from '../../../store/reducers/state-filter/selectors';
+import { QueryRoute } from '../../../constants';
+import { useHistory } from 'react-router-dom';
+import { AppRoute } from '../../../constants';
+
 import {
   getAllOffers,
   getAllOffersIsLoaded,
-  getAllOffersError
+  getAllOffersError,
+  getPriceOffersError
 } from '../../../store/reducers/data-offers/selectors';
+
 import {
   CatalogFilter,
   CatalogSort,
@@ -19,28 +26,47 @@ import {
 
 function CatalogMainSection (): JSX.Element {
 
-  const [sort, setSort] = useState<Sort>({ type: '', order: '' });
+  const history = useHistory();
+
+  const sort = useSelector(getSort);
+  const price = useSelector(getFilterPrice);
+  const types = useSelector(getFilterType);
+  const strings = useSelector(getFilterStrings);
+
   const sortQuery = getSortQuery(sort);
+  const priceQuery = getPriceQuery(price);
+  const typeQuery = getQuery(QueryRoute.Type, types);
+  const stringsQuery = getQuery(QueryRoute.Strings, strings);
+
+  const query = [
+    sortQuery,
+    priceQuery,
+    typeQuery,
+    stringsQuery,
+  ].join('');
+
+  const priceDispatchQuery = ['_sort=price', typeQuery, stringsQuery].join('');
 
 
   const allOffers = useSelector(getAllOffers).slice(0, 9);
   const isAllOffersLoaded = useSelector(getAllOffersIsLoaded);
-  const isError = useSelector(getAllOffersError);
+  const isAllOffersError = useSelector(getAllOffersError);
+  const isPriceOffersError = useSelector(getPriceOffersError);
   const dispatch = useDispatch();
 
-  const onSortChange = (currentSort: Sort) => {
-    setSort(currentSort);
-  };
-
   useEffect(() => {
-    dispatch(fetchAllOffersAction(sortQuery));
-  }, [dispatch, sortQuery]);
+    dispatch(fetchAllOffersAction(query));
+    dispatch(fetchPriceOffersAction(priceDispatchQuery));
+    const prefix = query.length ? '_?' : '';
+    history.push(`${AppRoute.Catalog}${prefix}${query.slice(1)}`);
+    // }
+  }, [dispatch, query, priceDispatchQuery, history]);
 
 
   return (
-    <ErrorWrapper isError={isError}>
+    <ErrorWrapper isError={isAllOffersError || isPriceOffersError}>
       <div className="catalog" >
-        <CatalogSort onSortChange={onSortChange}/>
+        <CatalogSort />
         <CatalogFilter />
         <LoaderWrapper isLoaded={isAllOffersLoaded}>
           <>

@@ -12,3 +12,15 @@ export const getAllOffersIsLoaded = (state: State) => (
 export const getAllOffersError = (state: State) => (
   state[StoreNameSpace.offers].isAllOffersError
 );
+
+export const getPriceOffers = (state: State) => (
+  state[StoreNameSpace.offers].priceOffers
+);
+
+export const getPriceOffersIsLoaded = (state: State) => (
+  state[StoreNameSpace.offers].isPriceOffersLoaded
+);
+
+export const getPriceOffersError = (state: State) => (
+  state[StoreNameSpace.offers].isPriceOffersError
+);

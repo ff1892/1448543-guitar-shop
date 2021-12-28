@@ -2,15 +2,18 @@ import { createReducer } from '@reduxjs/toolkit';
 import { DataOffers } from '../../../types/state';
 import {
   loadAllOffers,
-  loadAllOffersError
-  // loadPartialOffers,
-  // loadPartialOffersError
+  loadAllOffersError,
+  loadPriceOffers,
+  loadPriceOffersError
 } from '../../actions';
 
 const initialState: DataOffers = {
   allOffers: [],
   isAllOffersLoaded: false,
   isAllOffersError: false,
+  priceOffers: [],
+  isPriceOffersLoaded: false,
+  isPriceOffersError: false,
 };
 
 export const dataOffers = createReducer(initialState, (builder) => {
@@ -22,5 +25,13 @@ export const dataOffers = createReducer(initialState, (builder) => {
     })
     .addCase(loadAllOffersError, (state, _action) => {
       state.isAllOffersError = true;
+    })
+    .addCase(loadPriceOffers, (state, action) => {
+      state.isPriceOffersError = false;
+      state.priceOffers = action.payload;
+      state.isPriceOffersLoaded = true;
+    })
+    .addCase(loadPriceOffersError, (state, _action) => {
+      state.isPriceOffersError = true;
     });
 });

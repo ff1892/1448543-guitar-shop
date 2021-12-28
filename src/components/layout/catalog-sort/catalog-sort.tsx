@@ -1,12 +1,12 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useEffect } from 'react';
 import { Sort } from '../../../types/components';
 import { ButtonLabel } from '../../../constants';
+import { useDispatch } from 'react-redux';
+import { changeSort } from '../../../store/actions';
 
-type CatalogSortProps = {
-  onSortChange: (currentSort: Sort) => void,
-};
 
-function CatalogSort({ onSortChange }: CatalogSortProps): JSX.Element {
+function CatalogSort(): JSX.Element {
+  const dispatch = useDispatch();
   const [sort, setSort] = useState<Sort>({type: '', order: ''});
   const { type, order } = sort;
 
@@ -28,7 +28,6 @@ function CatalogSort({ onSortChange }: CatalogSortProps): JSX.Element {
     const newSort = order ? { ...sort, type: currentType } :
       { order: ButtonLabel.Descending, type: currentType };
     setSort(newSort);
-    onSortChange(newSort);
   };
 
   const onOrderButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
@@ -39,8 +38,11 @@ function CatalogSort({ onSortChange }: CatalogSortProps): JSX.Element {
     const newSort = type ? { ...sort, order: currentOrder } :
       { type: ButtonLabel.Price, order: currentOrder };
     setSort(newSort);
-    onSortChange(newSort);
   };
+
+  useEffect(() => {
+    dispatch(changeSort(sort));
+  }, [dispatch, sort]);
 
   return (
     <div className="catalog-sort">
