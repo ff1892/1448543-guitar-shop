@@ -11,6 +11,8 @@ export type Guitar = {
   comments: CommentGet[],
 };
 
+export type GuitarNoComments = Omit<Guitar, 'comments'>;
+
 export type CommentGet = {
   id: string,
   userName: string,

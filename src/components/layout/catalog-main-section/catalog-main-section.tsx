@@ -45,7 +45,7 @@ function CatalogMainSection (): JSX.Element {
     stringsQuery,
   ].join('');
 
-  const priceDispatchQuery = ['_sort=price', typeQuery, stringsQuery].join('');
+  const priceDispatchQuery = [QueryRoute.SortPrice, typeQuery, stringsQuery].join('');
 
 
   const allOffers = useSelector(getAllOffers).slice(0, 9);
@@ -59,7 +59,6 @@ function CatalogMainSection (): JSX.Element {
     dispatch(fetchPriceOffersAction(priceDispatchQuery));
     const prefix = query.length ? '_?' : '';
     history.push(`${AppRoute.Catalog}${prefix}${query.slice(1)}`);
-    // }
   }, [dispatch, query, priceDispatchQuery, history]);
 
 

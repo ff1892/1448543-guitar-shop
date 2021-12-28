@@ -1,31 +1,9 @@
-import { Guitar } from './types/data';
 import { Sort, FilterGuitarType, FilterPrice } from './types/components';
-import { ButtonLabel } from './constants';
+import { ButtonLabel, QueryRoute } from './constants';
 
 export const getFormattedPrice = (price: number): string => (
   `${price.toLocaleString() } ₽`
 );
-
-const filterNameByQuery = (name: string, query: string): boolean => {
-  const lowerCaseName = name.toLowerCase();
-  const lowerCaseQuery = query.toLowerCase();
-  const indexFind = lowerCaseName.indexOf(lowerCaseQuery);
-  return indexFind !== -1;
-};
-
-export const getFilteredOffersByName = (query: string, offers: Guitar[]): Guitar[] => {
-  const trimmedQuery = query.replace(/^\s+/, '');
-  if (!trimmedQuery) {
-    return [];
-  }
-  return offers.filter(({ name }) => filterNameByQuery(name, trimmedQuery));
-};
-
-export const getMinMaxPrice = (offers: Guitar[]) => {
-  const minPrice = Math.min(...offers.map(({ price }) => price));
-  const maxPrice = Math.max(...offers.map(({ price }) => price));
-  return { minPrice, maxPrice };
-};
 
 export const getIsStringMatchesTypes =
   (typeState: string[],
@@ -69,8 +47,8 @@ export const getSortQuery = ({ type, order }: Sort): string => {
 
 export const getPriceQuery = (state: FilterPrice): string => {
   const { minPrice, maxPrice } = state;
-  const minQuery = minPrice !== '' ? `&price_gte=${minPrice}` : '';
-  const maxQuery = maxPrice !== '' ? `&price_lte=${maxPrice}` : '';
+  const minQuery = minPrice !== '' ? `${QueryRoute.MinPrice}${minPrice}` : '';
+  const maxQuery = maxPrice !== '' ? `${QueryRoute.MaxPrice}${maxPrice}` : '';
   return minQuery + maxQuery;
 };
 

@@ -24,3 +24,15 @@ export const getPriceOffersIsLoaded = (state: State) => (
 export const getPriceOffersError = (state: State) => (
   state[StoreNameSpace.offers].isPriceOffersError
 );
+
+export const getSimiliarOffers = (state: State) => (
+  state[StoreNameSpace.offers].similiarOffers
+);
+
+export const getSimiliarOffersIsLoaded = (state: State) => (
+  state[StoreNameSpace.offers].isSimiliarOffersLoaded
+);
+
+export const getSimiliarOffersError = (state: State) => (
+  state[StoreNameSpace.offers].isSimiliarOffersError
+);

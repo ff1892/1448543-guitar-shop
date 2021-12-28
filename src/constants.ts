@@ -17,6 +17,11 @@ export enum QueryRoute {
   Sort= '&_sort=',
   Type = '&type=',
   Strings = '&stringCount=',
+  SortPrice = '_sort=price',
+  MinPrice = '&price_gte=',
+  MaxPrice = '&price_lte=',
+  Similiar = 'name_like=',
+
 }
 
 export enum ButtonLabel {

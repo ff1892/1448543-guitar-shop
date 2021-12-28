@@ -1,4 +1,4 @@
-import { Guitar } from './data';
+import { Guitar, GuitarNoComments } from './data';
 import { Sort, FilterPrice } from './components';
 import { RootState } from '../store/reducers/root-reducer';
 
@@ -9,6 +9,9 @@ export type DataOffers = {
   priceOffers: Guitar[],
   isPriceOffersLoaded: boolean,
   isPriceOffersError: boolean,
+  similiarOffers: GuitarNoComments[],
+  isSimiliarOffersLoaded: boolean,
+  isSimiliarOffersError: boolean,
 };
 
 export type StateSort = {

@@ -1,19 +1,30 @@
-import { useState, ChangeEvent } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect, ChangeEvent } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllOffers } from '../../../store/reducers/data-offers/selectors';
-import { getFilteredOffersByName } from '../../../utils';
+import { getSimiliarOffers, getSimiliarOffersIsLoaded } from '../../../store/reducers/data-offers/selectors';
+import { fetchSumiliarOffersAction } from '../../../store/api-actions/data-offers/data-offers';
 import { AppRoute } from '../../../constants';
+import useDebounce from '../../../hooks/use-debounce';
+// import useDebounce from '../../../hooks/use-debounce';
 
 function SearchForm (): JSX.Element {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState<string>('');
+  const debauncedSearch = useDebounce(searchValue, 500);
+  const hasText = debauncedSearch !== '';
 
-  const allOffers = useSelector(getAllOffers);
-  const filteredOffers = searchValue ? getFilteredOffersByName(searchValue, allOffers) : [];
+  const similiarOffers = useSelector(getSimiliarOffers);
+  const isLoaded = useSelector(getSimiliarOffersIsLoaded);
 
   const onInputChange = (evt: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(evt.target.value);
   };
+
+  useEffect(() => {
+    if (hasText) {
+      dispatch(fetchSumiliarOffersAction(debauncedSearch));
+    }
+  }, [dispatch, hasText, debauncedSearch]);
 
   return (
     <div className="form-search">
@@ -33,11 +44,11 @@ function SearchForm (): JSX.Element {
         />
         <label className="visually-hidden" htmlFor="search">Поиск</label>
       </form>
-      <ul className={`form-search__select-list ${filteredOffers.length ? '' : 'hidden'}`}
+      <ul className={`form-search__select-list ${similiarOffers.length && hasText ? '' : 'hidden'}`}
         style={{zIndex: 2}}
       >
-        {
-          filteredOffers.map(({ id, name }) => (
+        {(isLoaded && hasText) &&
+          similiarOffers.map(({ id, name }) => (
             <li className="form-search__select-item" key={id}>
               <Link
                 to={`${AppRoute.Guitars}/${id}`}
@@ -46,8 +57,7 @@ function SearchForm (): JSX.Element {
                 {name}
               </Link>
             </li>
-          ))
-        }
+          ))}
       </ul>
     </div>
   );

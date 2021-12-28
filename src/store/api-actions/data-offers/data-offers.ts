@@ -1,6 +1,14 @@
-import { loadAllOffers, loadAllOffersError, loadPriceOffers, loadPriceOffersError } from '../../actions';
+import {
+  loadAllOffers,
+  loadAllOffersError,
+  loadPriceOffers,
+  loadPriceOffersError,
+  loadSimiliarOffers,
+  loadSimiliarOffersError
+} from '../../actions';
+
 import { ApiRoute, QueryRoute } from '../../../constants';
-import { Guitar } from '../../../types/data';
+import { Guitar, GuitarNoComments } from '../../../types/data';
 import { ThunkActionResult } from '../../../types/action';
 
 export const fetchAllOffersAction = (query: string, comments = true): ThunkActionResult =>
@@ -22,6 +30,17 @@ export const fetchPriceOffersAction = (query: string): ThunkActionResult =>
       dispatch(loadPriceOffers(data));
     } catch {
       dispatch(loadPriceOffersError());
+    }
+  };
+
+export const fetchSumiliarOffersAction = (query: string): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    const fullQuery = `${ApiRoute.Guitars}?${QueryRoute.Similiar}${query}`;
+    try {
+      const { data } = await api.get<GuitarNoComments[]>(fullQuery);
+      dispatch(loadSimiliarOffers(data));
+    } catch {
+      dispatch(loadSimiliarOffersError());
     }
   };
 

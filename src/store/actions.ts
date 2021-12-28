@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
-import { Guitar } from '../types/data';
+import { Guitar, GuitarNoComments } from '../types/data';
 import { Sort, FilterPrice } from '../types/components';
 
 export const loadAllOffers = createAction(
@@ -20,6 +20,15 @@ export const loadPriceOffers = createAction(
 );
 
 export const loadPriceOffersError = createAction(ActionType.LoadPriceOffersError);
+
+export const loadSimiliarOffers = createAction(
+  ActionType.LoadSimiliarOffers,
+  (similiarOffers: GuitarNoComments[]) => ({
+    payload: similiarOffers,
+  }),
+);
+
+export const loadSimiliarOffersError = createAction(ActionType.LoadSimiliarOffersError);
 
 export const changeSort = createAction(
   ActionType.ChangeSort,
