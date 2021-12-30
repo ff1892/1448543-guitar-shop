@@ -2,17 +2,23 @@ import { ChangeEvent, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilterType } from '../../../store/reducers/state-filter/selectors';
 import { changeFilterStrings } from '../../../store/actions';
-import { filterStringsData } from '../../../constants';
+import { filterStringsData, INITIAL_PAGE, filterGuitarsData } from '../../../constants';
 import { getIsStringMatchesTypes } from '../../../utils';
-import { filterGuitarsData } from '../../../constants';
+import { changePage } from '../../../store/actions';
+import { getPage } from '../../../store/reducers/state-page/selectors';
 
 
 function FilterStrings(): JSX.Element {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState<string[]>([]);
   const filterType = useSelector(getFilterType);
+  const page = useSelector(getPage);
 
   const onFilterChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    if (page !== INITIAL_PAGE) {
+      dispatch(changePage(INITIAL_PAGE));
+    }
+
     const isChecked = evt.currentTarget.checked;
     const currentString = evt.currentTarget.dataset.strings;
     if (!currentString) {

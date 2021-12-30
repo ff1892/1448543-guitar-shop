@@ -3,6 +3,7 @@ import { Sort, FilterPrice } from './components';
 import { RootState } from '../store/reducers/root-reducer';
 
 export type DataOffers = {
+  totalCount: number,
   allOffers: Guitar[],
   isAllOffersLoaded: boolean,
   isAllOffersError: boolean,
@@ -22,6 +23,10 @@ export type StateFilter = {
   filterType: string[],
   filterStrings: string[],
   filterPrice: FilterPrice,
+};
+
+export type StatePage = {
+  page: number,
 };
 
 export type State = RootState;

@@ -4,12 +4,16 @@ import { getPriceOffers, getPriceOffersIsLoaded } from '../../../store/reducers/
 import { validatePrice } from '../../../utils';
 import { changeFilterPrice } from '../../../store/actions';
 import useDebounce from '../../../hooks/use-debounce';
+import { INITIAL_PAGE } from '../../../constants';
+import { changePage } from '../../../store/actions';
+import { getPage } from '../../../store/reducers/state-page/selectors';
 
 function FilterPrice(): JSX.Element {
 
   const dispatch = useDispatch();
   const priceOffers = useSelector(getPriceOffers);
   const isLoaded = useSelector(getPriceOffersIsLoaded);
+  const page = useSelector(getPage);
   const [minPrice, maxPrice] = [priceOffers[0].price, priceOffers[priceOffers.length - 1].price];
   const minPriceRef = useRef<HTMLInputElement | null>(null);
   const maxPriceRef = useRef<HTMLInputElement | null>(null);
@@ -21,6 +25,9 @@ function FilterPrice(): JSX.Element {
 
   const onMinPriceChange = (evt: ChangeEvent<HTMLInputElement>): void => {
     if (minPriceRef.current) {
+      if (page !== INITIAL_PAGE) {
+        dispatch(changePage(INITIAL_PAGE));
+      }
       const minInput = minPriceRef.current.value;
       const minInputNumber = parseInt(minInput, 10);
       minPriceRef.current.setCustomValidity(
@@ -57,6 +64,9 @@ function FilterPrice(): JSX.Element {
 
   const onMaxPriceChange = (evt: ChangeEvent<HTMLInputElement>): void => {
     if (maxPriceRef.current) {
+      if (page !== INITIAL_PAGE) {
+        dispatch(changePage(INITIAL_PAGE));
+      }
       const maxInput = maxPriceRef.current.value;
       const maxInputNumber = parseInt(maxInput, 10);
       maxPriceRef.current.setCustomValidity(

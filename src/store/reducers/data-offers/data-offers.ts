@@ -1,6 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DataOffers } from '../../../types/state';
 import {
+  loadTotalCount,
   loadAllOffers,
   loadAllOffersError,
   loadPriceOffers,
@@ -10,6 +11,7 @@ import {
 } from '../../actions';
 
 const initialState: DataOffers = {
+  totalCount: 0,
   allOffers: [],
   isAllOffersLoaded: false,
   isAllOffersError: false,
@@ -23,6 +25,9 @@ const initialState: DataOffers = {
 
 export const dataOffers = createReducer(initialState, (builder) => {
   builder
+    .addCase(loadTotalCount, (state, action) => {
+      state.totalCount = action.payload;
+    })
     .addCase(loadAllOffers, (state, action) => {
       state.isAllOffersError = false;
       state.allOffers = action.payload;

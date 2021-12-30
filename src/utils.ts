@@ -1,5 +1,5 @@
 import { Sort, FilterGuitarType, FilterPrice } from './types/components';
-import { ButtonLabel, QueryRoute } from './constants';
+import { ButtonLabel, QueryRoute, OFFERS_TO_SHOW } from './constants';
 
 export const getFormattedPrice = (price: number): string => (
   `${price.toLocaleString() } ₽`
@@ -58,6 +58,8 @@ export const getQuery = (query: string, state: string[]): string => {
   }
   return state.map((item) => `${query}${item}`).join('');
 };
+
+export const getPageQuery = (query: number): string => `&_start=${(query - 1) * OFFERS_TO_SHOW}&_limit=${OFFERS_TO_SHOW}`;
 
 
 export const validatePrice = (password: string): string => {

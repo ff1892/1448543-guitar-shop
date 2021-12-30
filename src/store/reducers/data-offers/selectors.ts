@@ -1,6 +1,10 @@
 import { State } from '../../../types/state';
 import { StoreNameSpace } from '../root-reducer';
 
+export const getTotalCount = (state: State) => (
+  state[StoreNameSpace.offers].totalCount
+);
+
 export const getAllOffers = (state: State) => (
   state[StoreNameSpace.offers].allOffers
 );

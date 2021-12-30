@@ -1,6 +1,9 @@
 import { FilterGuitarType } from './types/components';
 
 export const MAX_RATING = 5;
+export const OFFERS_TO_SHOW = 9;
+export const INITIAL_PAGE = 1;
+export const TOTAL_COUNT_HEADER = 'x-total-count';
 
 export enum ApiRoute {
   Guitars = '/guitars',
@@ -8,7 +11,7 @@ export enum ApiRoute {
 
 export enum AppRoute {
   Main = '/',
-  Catalog = '/catalog/page_1',
+  Catalog = '/catalog/page_',
   Guitars= '/guitars',
 }
 

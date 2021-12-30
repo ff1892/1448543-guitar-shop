@@ -3,6 +3,13 @@ import { ActionType } from '../types/action';
 import { Guitar, GuitarNoComments } from '../types/data';
 import { Sort, FilterPrice } from '../types/components';
 
+export const loadTotalCount = createAction(
+  ActionType.LoadTotalCount,
+  (totalCount: number) => ({
+    payload: totalCount,
+  }),
+);
+
 export const loadAllOffers = createAction(
   ActionType.LoadAllOffers,
   (allOffers: Guitar[]) => ({
@@ -55,5 +62,12 @@ export const changeFilterPrice = createAction(
   ActionType.ChangeFilterPrice,
   (filterPrice: FilterPrice) => ({
     payload: filterPrice,
+  }),
+);
+
+export const changePage = createAction(
+  ActionType.ChangePage,
+  (page: number) => ({
+    payload: page,
   }),
 );

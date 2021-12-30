@@ -5,16 +5,17 @@ import { getSimiliarOffers, getSimiliarOffersIsLoaded } from '../../../store/red
 import { fetchSumiliarOffersAction } from '../../../store/api-actions/data-offers/data-offers';
 import { AppRoute } from '../../../constants';
 import useDebounce from '../../../hooks/use-debounce';
-// import useDebounce from '../../../hooks/use-debounce';
 
 function SearchForm (): JSX.Element {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState<string>('');
   const debauncedSearch = useDebounce(searchValue, 500);
-  const hasText = debauncedSearch !== '';
+  const hasText = debauncedSearch.trim() !== '';
 
   const similiarOffers = useSelector(getSimiliarOffers);
+  const similiarOffersCount = useSelector(getSimiliarOffers).length;
   const isLoaded = useSelector(getSimiliarOffersIsLoaded);
+
 
   const onInputChange = (evt: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(evt.target.value);
@@ -39,15 +40,19 @@ function SearchForm (): JSX.Element {
           id="search"
           type="text"
           autoComplete="off"
-          placeholder="что вы ищите?"
+          placeholder="что вы ищете?"
           onChange={onInputChange}
         />
         <label className="visually-hidden" htmlFor="search">Поиск</label>
       </form>
-      <ul className={`form-search__select-list ${similiarOffers.length && hasText ? '' : 'hidden'}`}
+
+      <ul
+        className={`form-search__select-list ${hasText ? '' : 'hidden'}`}
         style={{zIndex: 2}}
       >
-        {(isLoaded && hasText) &&
+        {!isLoaded && <li style={{ paddingTop: '5px' }}>Ищем...</li>}
+        {(isLoaded && !similiarOffersCount) && <li style={{paddingTop: '5px'}}>Ничего не нашлось</li>}
+        { similiarOffersCount ?
           similiarOffers.map(({ id, name }) => (
             <li className="form-search__select-item" key={id}>
               <Link
@@ -57,7 +62,7 @@ function SearchForm (): JSX.Element {
                 {name}
               </Link>
             </li>
-          ))}
+          )) : ''}
       </ul>
     </div>
   );
