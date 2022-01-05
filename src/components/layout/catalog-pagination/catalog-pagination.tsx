@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { MouseEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changePage } from '../../../store/actions';
-import { OFFERS_TO_SHOW } from '../../../constants';
+import { OFFERS_TO_SHOW, AppRoute } from '../../../constants';
 
 const pagintationSettings = {
   offersToShow: OFFERS_TO_SHOW,
@@ -75,7 +75,7 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
             >
               <Link
                 className="link pagination__page-link"
-                to={pageNumber.toString()}
+                to={`${AppRoute.Catalog}${pageNumber}`}
                 onClick={onPageClick}
               >
                 {pageNumber}

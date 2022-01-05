@@ -1,5 +1,5 @@
 .loader {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -17,7 +17,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #4481c3;
+  background: rgb(65, 65, 65);
   animation: lds-grid 1.2s linear infinite;
 }
 .lds-grid div:nth-child(1) {

@@ -8,7 +8,7 @@ export { default as CatalogFilter } from './layout/catalog-filter/catalog-filter
 export { default as FilterType } from './layout/filter-type/filter-type';
 export { default as FilterStrings } from './layout/filter-strings/filter-strings';
 export { default as FilterPrice } from './layout/filter-price/filter-price';
-export { default as CatalogNavigation } from './layout/catalog-navigation/catalog-navigation';
+export { default as CatalogBreadcrumbs } from './layout/catalog-breadcrumbs/catalog-breadcrumbs';
 export { default as CatalogSort } from './layout/catalog-sort/catalog-sort';
 export { default as CatalogPagination } from './layout/catalog-pagination/catalog-pagination';
 export { default as CatalogMainSection } from './layout/catalog-main-section/catalog-main-section';
@@ -18,3 +18,4 @@ export { default as LoaderWrapper } from './layout/loader-wrapper/loader-wrapper
 export { default as ErrorWrapper } from './layout/error-wrapper/error-wrapper';
 export { default as SvgSprite } from './layout/svg-sprite/svg-sprite';
 export { default as PageLayout } from './layout/page-layout/page-layout';
+export { default as NoOffers } from './layout/no-offers/no-offers';

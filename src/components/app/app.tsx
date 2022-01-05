@@ -1,6 +1,7 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import MainPage from '../pages/main-page/main-page';
+import NotFoundPage from '../pages/not-found-page/not-found-page';
 
 function App(): JSX.Element {
   return (
@@ -11,6 +12,9 @@ function App(): JSX.Element {
       </Route>
       <Route exact path={`${AppRoute.Catalog}:query`}>
         <MainPage />
+      </Route>
+      <Route>
+        <NotFoundPage />
       </Route>
     </Switch>
   );

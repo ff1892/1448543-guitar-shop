@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import { getFormattedPrice } from '../../../utils';
 import { Guitar } from '../../../types/data';
 import { StarsRating } from '../../components';
+import { AppRoute } from '../../../constants';
 
 type OfferCardProps = {
   offer: Guitar,
@@ -9,6 +11,7 @@ type OfferCardProps = {
 function OfferCard({ offer }: OfferCardProps): JSX.Element {
 
   const {
+    id,
     previewImg,
     name,
     rating,
@@ -36,8 +39,12 @@ function OfferCard({ offer }: OfferCardProps): JSX.Element {
         </p>
       </div>
       <div className="product-card__buttons">
-        <a className="button button--mini" href="#">Подробнее</a>
-        <a className="button button--red button--mini button--add-to-cart" href="#">Купить</a>
+        <Link className="button button--mini" to={`${AppRoute.Guitars}/${id}`}>
+          Подробнее
+        </Link>
+        <Link className="button button--red button--mini button--add-to-cart" to={AppRoute.Cart}>
+          Купить
+        </Link>
       </div>
     </div>
   );

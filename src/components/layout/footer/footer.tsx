@@ -1,10 +1,20 @@
-function Footer (): JSX.Element {
+import { AppRoute } from '../../../constants';
+import { Link } from 'react-router-dom';
+
+type FooterProps = {
+  isMainPage?: boolean,
+}
+
+function Footer({ isMainPage = false }: FooterProps): JSX.Element {
   return (
     <footer className="footer">
       <div className="footer__container container">
-        <a className="footer__logo logo" href="#">
+        <Link className="footer__logo logo"
+          to={AppRoute.Main}
+          style={{ pointerEvents: `${isMainPage ? 'none' : 'auto'}` }}
+        >
           <img className="logo__img" width="70" height="70" src="../img/svg/logo.svg" alt="Логотип" />
-        </a>
+        </Link>
         <div className="socials footer__socials">
           <ul className="socials__list">
             <li className="socials-item">

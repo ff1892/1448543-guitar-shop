@@ -13,6 +13,9 @@ export enum AppRoute {
   Main = '/',
   Catalog = '/catalog/page_',
   Guitars= '/guitars',
+  About='/about',
+  Shops='/shops',
+  Cart='/cart',
 }
 
 export enum QueryRoute {

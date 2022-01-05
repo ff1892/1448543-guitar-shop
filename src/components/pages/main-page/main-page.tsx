@@ -8,9 +8,9 @@ import {
 function MainPage(): JSX.Element {
   return (
     <PageLayout>
-      <Header />
+      <Header isMainPage />
       <Catalog />
-      <Footer />
+      <Footer isMainPage />
     </PageLayout>
   );
 }
