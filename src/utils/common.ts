@@ -1,5 +1,5 @@
-import { Sort, FilterGuitarType, FilterPrice } from './types/components';
-import { ButtonLabel, QueryRoute, OFFERS_TO_SHOW } from './constants';
+import { Sort, FilterGuitarType, FilterPrice } from '../types/components';
+import { ButtonLabel, QueryRoute, OFFERS_TO_SHOW } from '../constants';
 
 export const getFormattedPrice = (price: number): string => (
   `${price.toLocaleString() } ₽`

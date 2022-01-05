@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { SvgSprite } from './components/components';
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getFilterType } from '../../../store/reducers/state-filter/selectors';
 import { changeFilterStrings } from '../../../store/actions';
 import { filterStringsData, INITIAL_PAGE, filterGuitarsData } from '../../../constants';
-import { getIsStringMatchesTypes } from '../../../utils';
+import { getIsStringMatchesTypes } from '../../../utils/common';
 import { changePage } from '../../../store/actions';
 import { getPage } from '../../../store/reducers/state-page/selectors';
 

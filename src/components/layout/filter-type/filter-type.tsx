@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeFilterType } from '../../../store/actions';
 import { filterGuitarsData, filterStringsData, INITIAL_PAGE} from '../../../constants';
-import { getIsTypeMatchesStrings } from '../../../utils';
+import { getIsTypeMatchesStrings } from '../../../utils/common';
 import { getFilterStrings } from '../../../store/reducers/state-filter/selectors';
 import { changePage } from '../../../store/actions';
 import { getPage } from '../../../store/reducers/state-page/selectors';

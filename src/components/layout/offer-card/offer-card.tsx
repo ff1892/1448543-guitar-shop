@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { getFormattedPrice } from '../../../utils';
+import { getFormattedPrice } from '../../../utils/common';
 import { Guitar } from '../../../types/data';
 import { StarsRating } from '../../components';
 import { AppRoute } from '../../../constants';

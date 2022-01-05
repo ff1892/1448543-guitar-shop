@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllOffersAction, fetchPriceOffersAction } from '../../../store/api-actions/data-offers/data-offers';
-import { getSortQuery, getQuery, getPriceQuery, getPageQuery } from '../../../utils';
+import { getSortQuery, getQuery, getPriceQuery, getPageQuery } from '../../../utils/common';
 import { getSort } from '../../../store/reducers/state-sort/selectors';
 import { getFilterType, getFilterStrings, getFilterPrice } from '../../../store/reducers/state-filter/selectors';
 import { getPage } from '../../../store/reducers/state-page/selectors';
@@ -72,7 +72,7 @@ function CatalogMainSection (): JSX.Element {
 
   return (
     <ErrorWrapper isError={isAllOffersError || isPriceOffersError}>
-      <div className="catalog" >
+      <div className="catalog" data-testid="root page">
         <CatalogSort />
         <CatalogFilter />
         <LoaderWrapper isLoaded={isAllOffersLoaded}>

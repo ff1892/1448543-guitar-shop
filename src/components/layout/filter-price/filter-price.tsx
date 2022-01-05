@@ -1,7 +1,7 @@
 import { ChangeEvent, FocusEvent, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPriceOffers, getPriceOffersIsLoaded } from '../../../store/reducers/data-offers/selectors';
-import { validatePrice } from '../../../utils';
+import { validatePrice } from '../../../utils/common';
 import { changeFilterPrice } from '../../../store/actions';
 import useDebounce from '../../../hooks/use-debounce';
 import { INITIAL_PAGE } from '../../../constants';
