@@ -11,16 +11,16 @@ const pagintationSettings = {
   initialStep: 1,
 };
 
-type PaginationProps = {
-  offers: number,
-};
-
 const {
   offersToShow,
   linksToShow,
   initialPage,
   initialStep,
 } = pagintationSettings;
+
+type PaginationProps = {
+  offers: number,
+};
 
 function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
 
 
   return (
-    <div className="pagination page-content__pagination">
+    <div className="pagination page-content__pagination" data-testid="pagination">
       <ul className="pagination__list">
         { step !== initialStep &&
           <li className="pagination__page pagination__page--prev" id="prev">
@@ -77,6 +77,7 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
                 className="link pagination__page-link"
                 to={`${AppRoute.Catalog}${pageNumber}`}
                 onClick={onPageClick}
+                data-testid={`page ${pageNumber}`}
               >
                 {pageNumber}
               </Link>

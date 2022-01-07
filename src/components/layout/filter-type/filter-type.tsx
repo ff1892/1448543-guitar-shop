@@ -36,7 +36,7 @@ function FilterType (): JSX.Element {
   }, [dispatch, filter]);
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset className="catalog-filter__block" data-testid="filter type">
       {filterGuitarsData.map(({ type, label }) => (
         <div className="form-checkbox catalog-filter__block-item" key={type}>
           <input className="visually-hidden"

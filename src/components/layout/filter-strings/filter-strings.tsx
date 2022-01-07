@@ -38,7 +38,7 @@ function FilterStrings(): JSX.Element {
   }, [dispatch, filter]);
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset className="catalog-filter__block" data-testid="filter strings">
       <legend className="catalog-filter__block-title">Количество струн</legend>
       {filterStringsData.map((stringCount) => {
         const stringName = `${stringCount}-strings`;

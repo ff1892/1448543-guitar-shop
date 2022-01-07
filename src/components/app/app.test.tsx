@@ -36,9 +36,16 @@ function getFakeApp(): JSX.Element {
 }
 
 describe('Application routing', () => {
-  it('should render MainScreen when user navigate to "/aaa"', () => {
+  it('should render MainPage when user navigates to "/"', () => {
     history.push(AppRoute.Main);
     render(getFakeApp());
     expect(screen.getByTestId(/root page/i)).toBeInTheDocument();
+  });
+  it('should render NotFoundPage when user navigates to incorrect route', () => {
+    history.push('/incorrect');
+    render(getFakeApp());
+
+    expect(screen.getByText(/Страница не найдена/i)).toBeInTheDocument();
+    expect(screen.getByText(/Перейти на главную страницу/i)).toBeInTheDocument();
   });
 });

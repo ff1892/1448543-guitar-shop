@@ -108,7 +108,7 @@ function FilterPrice(): JSX.Element {
   }, [dispatch, debauncedMin, debauncedMax]);
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset className="catalog-filter__block" data-testid="filter price">
       <legend className="catalog-filter__block-title">Цена, ₽</legend>
       <div className="catalog-filter__price-range">
         <div className="form-input">
@@ -117,6 +117,7 @@ function FilterPrice(): JSX.Element {
             type="number"
             placeholder={isLoaded ? minPrice.toLocaleString(): ''}
             id="priceMin"
+            data-testid="price min"
             name="от"
             onChange={onMinPriceChange}
             onBlur={onMinPriceLeave}

@@ -22,8 +22,8 @@ function OfferCard({ offer }: OfferCardProps): JSX.Element {
   const formattedPrice = getFormattedPrice(price);
 
   return(
-    <div className="product-card">
-      <img src={`../${previewImg}`} width="75" height="190" alt="СURT Z30 Plus Acoustics" />
+    <div className="product-card" data-testid='offer card'>
+      <img src={`../${previewImg}`} width="75" height="190" alt={name} />
       <div className="product-card__info">
         <div className="rate product-card__rate" aria-hidden="true">
           <StarsRating rating={rating} />

@@ -16,7 +16,7 @@ function StarsRating({ rating }: starsRatingProps): JSX.Element {
 
   return(
     <>
-      <span className="visually-hidden">Рейтинг:</span>
+      <span className="visually-hidden" data-testid="stars rating">Рейтинг:</span>
       { starsData.map(({ id, grade}) => (
         <svg width="12" height="11" aria-hidden="true" key={id}>
           <use

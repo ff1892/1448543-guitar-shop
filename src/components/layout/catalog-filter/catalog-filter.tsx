@@ -7,7 +7,7 @@ function CatalogFilter (): JSX.Element {
   const isLoaded = useSelector(getPriceOffersIsLoaded);
 
   return (
-    <form className="catalog-filter">
+    <form className="catalog-filter" data-testid="catalog filter">
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
       { isLoaded && <FilterPrice /> }
       <FilterType />

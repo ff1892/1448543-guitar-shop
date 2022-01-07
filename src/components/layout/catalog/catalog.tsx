@@ -6,7 +6,7 @@ import {
 
 function Catalog (): JSX.Element {
   return (
-    <main className="page-content">
+    <main className="page-content" data-testid="catalog main">
       <div className="container">
         <CatalogBreadcrumbs />
         <CatalogMainSection />

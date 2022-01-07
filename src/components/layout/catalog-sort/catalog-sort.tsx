@@ -11,8 +11,8 @@ function CatalogSort(): JSX.Element {
   const { type, order } = sort;
 
   const typeButtonsData = [
-    { sortType: ButtonLabel.Price, name: 'по цене'},
-    { sortType: ButtonLabel.Rating, name: 'по популярности'},
+    { sortType: ButtonLabel.Price, name: 'По цене'},
+    { sortType: ButtonLabel.Rating, name: 'По популярности'},
   ];
 
   const orderButtonsData = [
@@ -58,6 +58,7 @@ function CatalogSort(): JSX.Element {
               aria-label={name}
               tabIndex={isSelected ? -1 : 0}
               data-type={sortType}
+              data-testid={sortType}
               onClick={onTypeButtonClick}
             >
               { name }
@@ -77,6 +78,7 @@ function CatalogSort(): JSX.Element {
               aria-label={name}
               tabIndex={isSelected ? -1 : 0}
               data-order={sortOrder}
+              data-testid={sortOrder}
               onClick={onOrderButtonClick}
             >
             </button>);

@@ -2,20 +2,20 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Router, Switch, Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import NotFoundScreen from './not-found-page';
+import NotFoundPage from './not-found-page';
 
 const history = createMemoryHistory();
 
-describe('Component: NotFoundScreen', () => {
+describe('Component: NotFoundPage', () => {
   it('should render correctly', () => {
     render(
       <Router history={history}>
-        <NotFoundScreen />
+        <NotFoundPage />
       </Router>,
     );
 
-    expect(screen.getByText(/Page not found/i)).toBeInTheDocument();
-    expect(screen.getByText(/Go to main page/i)).toBeInTheDocument();
+    expect(screen.getByText(/Страница не найдена/i)).toBeInTheDocument();
+    expect(screen.getByText(/Перейти на главную страницу/i)).toBeInTheDocument();
   });
 
   it('should redirect to root url when user clicked to link', () => {
@@ -27,7 +27,7 @@ describe('Component: NotFoundScreen', () => {
             <h1>This is a main page</h1>
           </Route>
           <Route>
-            <NotFoundScreen />
+            <NotFoundPage />
           </Route>
         </Switch>
       </Router>,
