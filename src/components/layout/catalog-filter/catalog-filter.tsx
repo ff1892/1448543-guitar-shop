@@ -1,4 +1,7 @@
-import { FilterType, FilterStrings, FilterPrice } from '../../components';
+import { FilterType,
+  FilterStrings,
+  FilterPrice
+} from '../../components';
 import { getPriceOffersIsLoaded } from '../../../store/reducers/data-offers/selectors';
 import { useSelector } from 'react-redux';
 

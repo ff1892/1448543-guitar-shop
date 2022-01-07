@@ -7,7 +7,6 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import userEvent from '@testing-library/user-event';
 import FilterPrice from './filter-price';
 import { makeFakeGuitarsNoComments } from '../../../utils/mocks';
-import { setTimeout } from 'timers';
 
 
 const mockStore = configureMockStore();
@@ -67,5 +66,6 @@ describe('Component: FilterType', () => {
     setTimeout(() => {
       expect(dispatch).toBeCalledTimes(2);
     }, 2000);
+    jest.clearAllTimers();
   });
 });

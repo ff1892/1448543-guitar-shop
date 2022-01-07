@@ -2,9 +2,9 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getSimiliarOffers, getSimiliarOffersIsLoaded } from '../../../store/reducers/data-offers/selectors';
-import { fetchSumiliarOffersAction } from '../../../store/api-actions/data-offers/data-offers';
+import { fetchSimiliarOffersAction } from '../../../store/api-actions/data-offers/data-offers';
 import { AppRoute } from '../../../constants';
-import useDebounce from '../../../hooks/use-debounce';
+import useDebounce from '../../../hooks/use-debounce/use-debounce';
 
 function SearchForm (): JSX.Element {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function SearchForm (): JSX.Element {
 
   useEffect(() => {
     if (hasText) {
-      dispatch(fetchSumiliarOffersAction(debauncedSearch));
+      dispatch(fetchSimiliarOffersAction(debauncedSearch));
     }
   }, [dispatch, hasText, debauncedSearch]);
 

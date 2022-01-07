@@ -46,6 +46,7 @@ describe('Component: SearchForm', () => {
     setTimeout(() => {
       expect(dispatch).toBeCalledTimes(1);
     }, 2000);
+    jest.clearAllTimers();
   });
 
   it('should show search query and similiar offers', () => {

@@ -35,7 +35,7 @@ export const fetchPriceOffersAction = (query: string): ThunkActionResult =>
     }
   };
 
-export const fetchSumiliarOffersAction = (query: string): ThunkActionResult =>
+export const fetchSimiliarOffersAction = (query: string): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     const fullQuery = `${ApiRoute.Guitars}?${QueryRoute.Similiar}${query}`;
     try {

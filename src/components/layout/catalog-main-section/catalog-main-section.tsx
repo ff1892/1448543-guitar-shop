@@ -1,13 +1,19 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { fetchAllOffersAction, fetchPriceOffersAction } from '../../../store/api-actions/data-offers/data-offers';
-import { getSortQuery, getQuery, getPriceQuery, getPageQuery } from '../../../utils/common';
 import { getSort } from '../../../store/reducers/state-sort/selectors';
 import { getFilterType, getFilterStrings, getFilterPrice } from '../../../store/reducers/state-filter/selectors';
 import { getPage } from '../../../store/reducers/state-page/selectors';
 import { QueryRoute, OFFERS_TO_SHOW } from '../../../constants';
-import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../../constants';
+
+import {
+  getSortQuery,
+  getQuery,
+  getPriceQuery,
+  getPageQuery
+} from '../../../utils/common';
 
 import {
   getTotalCount,
