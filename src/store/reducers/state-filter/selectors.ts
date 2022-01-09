@@ -2,13 +2,13 @@ import { State } from '../../../types/state';
 import { StoreNameSpace } from '../root-reducer';
 
 export const getFilterType = (state: State) => (
-  state[StoreNameSpace.filter].filterType
+  state[StoreNameSpace.Filter].filterType
 );
 
 export const getFilterStrings = (state: State) => (
-  state[StoreNameSpace.filter].filterStrings
+  state[StoreNameSpace.Filter].filterStrings
 );
 
 export const getFilterPrice = (state: State) => (
-  state[StoreNameSpace.filter].filterPrice
+  state[StoreNameSpace.Filter].filterPrice
 );

@@ -2,41 +2,41 @@ import { State } from '../../../types/state';
 import { StoreNameSpace } from '../root-reducer';
 
 export const getTotalCount = (state: State) => (
-  state[StoreNameSpace.offers].totalCount
+  state[StoreNameSpace.Offers].totalCount
 );
 
 export const getAllOffers = (state: State) => (
-  state[StoreNameSpace.offers].allOffers
+  state[StoreNameSpace.Offers].allOffers
 );
 
 export const getAllOffersIsLoaded = (state: State) => (
-  state[StoreNameSpace.offers].isAllOffersLoaded
+  state[StoreNameSpace.Offers].isAllOffersLoaded
 );
 
 export const getAllOffersError = (state: State) => (
-  state[StoreNameSpace.offers].isAllOffersError
+  state[StoreNameSpace.Offers].isAllOffersError
 );
 
 export const getPriceOffers = (state: State) => (
-  state[StoreNameSpace.offers].priceOffers
+  state[StoreNameSpace.Offers].priceOffers
 );
 
 export const getPriceOffersIsLoaded = (state: State) => (
-  state[StoreNameSpace.offers].isPriceOffersLoaded
+  state[StoreNameSpace.Offers].isPriceOffersLoaded
 );
 
 export const getPriceOffersError = (state: State) => (
-  state[StoreNameSpace.offers].isPriceOffersError
+  state[StoreNameSpace.Offers].isPriceOffersError
 );
 
 export const getSimiliarOffers = (state: State) => (
-  state[StoreNameSpace.offers].similiarOffers
+  state[StoreNameSpace.Offers].similiarOffers
 );
 
 export const getSimiliarOffersIsLoaded = (state: State) => (
-  state[StoreNameSpace.offers].isSimiliarOffersLoaded
+  state[StoreNameSpace.Offers].isSimiliarOffersLoaded
 );
 
 export const getSimiliarOffersError = (state: State) => (
-  state[StoreNameSpace.offers].isSimiliarOffersError
+  state[StoreNameSpace.Offers].isSimiliarOffersError
 );

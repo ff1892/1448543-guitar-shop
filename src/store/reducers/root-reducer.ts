@@ -5,17 +5,17 @@ import { stateSort } from './state-sort/state-sort';
 import { statePage } from './state-page/state-page';
 
 export enum StoreNameSpace {
-  offers = 'DATA_OFFERS',
-  filter = 'STATE_FILTER',
-  sort = 'STATE_SORT',
-  page = 'STATE_PAGE',
+  Offers = 'DATA_OFFERS',
+  Filter = 'STATE_FILTER',
+  Sort = 'STATE_SORT',
+  Page = 'STATE_PAGE',
 }
 
 export const rootReducer = combineReducers({
-  [StoreNameSpace.offers]: dataOffers,
-  [StoreNameSpace.filter]: stateFilter,
-  [StoreNameSpace.sort]: stateSort,
-  [StoreNameSpace.page]: statePage,
+  [StoreNameSpace.Offers]: dataOffers,
+  [StoreNameSpace.Filter]: stateFilter,
+  [StoreNameSpace.Sort]: stateSort,
+  [StoreNameSpace.Page]: statePage,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

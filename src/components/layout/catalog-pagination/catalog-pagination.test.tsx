@@ -6,20 +6,13 @@ import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import userEvent from '@testing-library/user-event';
 import CatalogPagination from './catalog-pagination';
-// import { makeFakeGuitar } from '../../../utils/mocks';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
-// const fakeGuitar = makeFakeGuitar();
-// const guitars = new Array(10).fill(fakeGuitar);
 
 describe('Component: CatalogPagination', () => {
 
-  const store = mockStore({
-    // STATE_PAGE: {
-    //   page: 1,
-    // },
-  });
+  const store = mockStore({});
 
   const fakeCatalogPagination = (
     <Provider store={store}>

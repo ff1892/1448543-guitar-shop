@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { fetchAllOffersAction, fetchPriceOffersAction } from '../../../store/api-actions/data-offers/data-offers';
 import { getSort } from '../../../store/reducers/state-sort/selectors';
 import { getFilterType, getFilterStrings, getFilterPrice } from '../../../store/reducers/state-filter/selectors';
@@ -32,14 +32,18 @@ import {
   ErrorWrapper
 } from '../../components';
 
-function CatalogMainSection (): JSX.Element {
+function CatalogMainSection(): JSX.Element {
 
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const search = useLocation().search;
+  const searchTypes = new URLSearchParams(search).getAll('type');
 
   const page = useSelector(getPage);
   const sort = useSelector(getSort);
   const price = useSelector(getFilterPrice);
-  const types = useSelector(getFilterType);
+  const types = useSelector(getFilterType) || searchTypes;
   const strings = useSelector(getFilterStrings);
 
   const pageQuery = getPageQuery(page);
@@ -48,33 +52,25 @@ function CatalogMainSection (): JSX.Element {
   const typeQuery = getQuery(QueryRoute.Type, types);
   const stringsQuery = getQuery(QueryRoute.Strings, strings);
 
-  const filterQuery = [priceQuery, typeQuery, stringsQuery].join('');
-
-  const query = [
-    sortQuery,
-    ...filterQuery,
-    pageQuery,
-  ].join('');
-
+  const filterSortQuery = [priceQuery, typeQuery, stringsQuery, sortQuery].join('');
+  const allDataQuery = [...filterSortQuery, pageQuery].join('');
   const priceDispatchQuery = [QueryRoute.SortPrice, typeQuery, stringsQuery].join('');
 
   const totalCount = useSelector(getTotalCount);
-
   const allOffers = useSelector(getAllOffers);
   const isAllOffersLoaded = useSelector(getAllOffersIsLoaded);
   const isAllOffersError = useSelector(getAllOffersError);
   const isPriceOffersError = useSelector(getPriceOffersError);
 
-  const dispatch = useDispatch();
+  const prefix = filterSortQuery.length ? '?' : '';
+  const historyQuery = AppRoute.Catalog + page + prefix + filterSortQuery;
 
-  const prefix = filterQuery.length ? '?' : '';
-  const historyQuery = AppRoute.Catalog + page + prefix + filterQuery;
 
   useEffect(() => {
-    dispatch(fetchAllOffersAction(query));
+    dispatch(fetchAllOffersAction(allDataQuery));
     dispatch(fetchPriceOffersAction(priceDispatchQuery));
     history.push(historyQuery);
-  }, [dispatch, query, historyQuery, priceDispatchQuery, history]);
+  }, [dispatch, allDataQuery, historyQuery, priceDispatchQuery, history]);
 
   return (
     <ErrorWrapper isError={isAllOffersError || isPriceOffersError}>
@@ -84,8 +80,8 @@ function CatalogMainSection (): JSX.Element {
         <LoaderWrapper isLoaded={isAllOffersLoaded}>
           <>
             <OfferList offerList={allOffers} />
-            { totalCount > OFFERS_TO_SHOW
-              && <CatalogPagination offers={totalCount}/>}
+            {totalCount > OFFERS_TO_SHOW
+              && <CatalogPagination offers={totalCount} />}
           </>
         </LoaderWrapper>
       </div>
