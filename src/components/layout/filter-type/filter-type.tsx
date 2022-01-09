@@ -1,56 +1,23 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { changeFilterType } from '../../../store/actions';
-import { filterGuitarsData, filterStringsData, INITIAL_PAGE} from '../../../constants';
+import { filterGuitarsData, filterStringsData} from '../../../constants';
 import { getIsTypeMatchesStrings } from '../../../utils/common';
-import { getFilterStrings } from '../../../store/reducers/state-filter/selectors';
-import { changePage } from '../../../store/actions';
-import { getPage } from '../../../store/reducers/state-page/selectors';
-
+import { FilterTypeItem } from '../../components';
+import useQuery from '../../../hooks/use-query/use-query';
 
 function FilterType (): JSX.Element {
-  const dispatch = useDispatch();
-  const page = useSelector(getPage);
-  const [filter, setFilter] = useState<string[]>([]);
-  const filterStrings = useSelector(getFilterStrings);
 
-  const onFilterChange = (evt: ChangeEvent<HTMLInputElement>) => {
-
-    if (page !== INITIAL_PAGE) {
-      dispatch(changePage(INITIAL_PAGE));
-    }
-
-    const isChecked = evt.currentTarget.checked;
-    const currentType = evt.currentTarget.id;
-    if (isChecked) {
-      setFilter((prevState) => [...prevState, currentType]);
-      return;
-    }
-    setFilter((prevState) => prevState
-      .filter( (type) =>
-        type !== currentType));
-  };
-
-  useEffect(() => {
-    dispatch(changeFilterType(filter));
-  }, [dispatch, filter]);
+  const query = useQuery();
+  const checkedStrings = query.getAll('stringCount');
 
   return (
     <fieldset className="catalog-filter__block" data-testid="filter type">
       {filterGuitarsData.map(({ type, label }) => (
-        <div className="form-checkbox catalog-filter__block-item" key={type}>
-          <input className="visually-hidden"
-            type="checkbox"
-            id={type}
-            name={type}
-            disabled={!getIsTypeMatchesStrings(
-              filterStrings, type, filterGuitarsData, filterStringsData)}
-            onChange={onFilterChange}
-          />
-          <label htmlFor={type}>
-            {label}
-          </label>
-        </div>
+        <FilterTypeItem
+          key={type}
+          type={type}
+          label={label}
+          disabled={!getIsTypeMatchesStrings(
+            checkedStrings, type, filterGuitarsData, filterStringsData)}
+        />
       ))}
     </fieldset>
   );

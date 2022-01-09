@@ -69,7 +69,7 @@ function CatalogMainSection(): JSX.Element {
   useEffect(() => {
     dispatch(fetchAllOffersAction(allDataQuery));
     dispatch(fetchPriceOffersAction(priceDispatchQuery));
-    history.push(historyQuery);
+    // history.push(historyQuery);
   }, [dispatch, allDataQuery, historyQuery, priceDispatchQuery, history]);
 
   return (
