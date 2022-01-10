@@ -6,11 +6,11 @@ import NotFoundPage from '../pages/not-found-page/not-found-page';
 function App(): JSX.Element {
   return (
     <Switch>
-      <Redirect exact from={AppRoute.Main} to={AppRoute.Catalog}/>
-      <Route exact path={`${AppRoute.Catalog}`}>
+      <Redirect exact from={AppRoute.Main} to={`${AppRoute.Catalog}${AppRoute.Page}`}/>
+      <Route exact path={`${AppRoute.Catalog}${AppRoute.Page}`}>
         <MainPage />
       </Route>
-      <Route exact path={`${AppRoute.Catalog}:query`}>
+      <Route exact path={`${AppRoute.Catalog}${AppRoute.Page}:query`}>
         <MainPage />
       </Route>
       <Route>

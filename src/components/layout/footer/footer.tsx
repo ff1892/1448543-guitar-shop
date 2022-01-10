@@ -6,6 +6,7 @@ type FooterProps = {
 }
 
 function Footer({ isMainPage = false }: FooterProps): JSX.Element {
+
   return (
     <footer className="footer">
       <div className="footer__container container">

@@ -16,7 +16,7 @@ function FilterTypeItem ({ type, label, disabled }: FilterTypeItemProps): JSX.El
   const dispatch = useDispatch();
   const history = useHistory();
   const query = useQuery();
-  const checkedItems = query.getAll('type');
+  const checkedItems = query.getAll(HistoryRoute.Type);
   const { pathname } = useLocation();
 
   const [isChecked, setIsChecked] = useState<boolean>(
@@ -25,9 +25,9 @@ function FilterTypeItem ({ type, label, disabled }: FilterTypeItemProps): JSX.El
 
   useEffect(() => {
     if (disabled && checkedItems.includes(type)) {
-      query.delete('type');
+      query.delete(HistoryRoute.Type);
       const checkedTypes = checkedItems.filter((item) => item !== type);
-      checkedTypes.forEach((item) => query.append('type', item));
+      checkedTypes.forEach((item) => query.append(HistoryRoute.Type, item));
       history.replace({ pathname: pathname, search: query.toString() });
     }
     setIsChecked(checkedItems.includes(type) && !disabled);
@@ -36,14 +36,14 @@ function FilterTypeItem ({ type, label, disabled }: FilterTypeItemProps): JSX.El
   const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { checked } = evt.target;
     setIsChecked(checked);
-    query.delete('type');
+    query.delete(HistoryRoute.Type);
 
     if (checked) {
       checkedItems.push(type);
-      checkedItems.forEach((item) => query.append('type', item));
+      checkedItems.forEach((item) => query.append(HistoryRoute.Type, item));
     } else {
       const checkedTypes = checkedItems.filter((item) => type !== item);
-      checkedTypes.forEach((item) => query.append('type', item));
+      checkedTypes.forEach((item) => query.append(HistoryRoute.Type, item));
     }
     dispatch(changePage(INITIAL_PAGE));
     history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });

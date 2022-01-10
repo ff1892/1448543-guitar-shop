@@ -61,11 +61,11 @@ describe('Component: CatalogMainSection', () => {
     expect(screen.getByTestId(/root page/i)).toBeInTheDocument();
   });
 
-  it('should dispach an action when fetch all and price offers, filter, sort and page', () => {
+  it('should dispach an action when fetch all and price offers and page', () => {
     const dispatch = jest.fn();
     const useDispatch = jest.spyOn(Redux, 'useDispatch');
     useDispatch.mockReturnValue(dispatch);
     render(fakeCatalogMainSection);
-    expect(dispatch).toBeCalledTimes(5);
+    expect(dispatch).toBeCalledTimes(3);
   });
 });

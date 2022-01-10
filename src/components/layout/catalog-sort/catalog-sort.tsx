@@ -1,13 +1,23 @@
 import { useState, MouseEvent, useEffect } from 'react';
 import { Sort } from '../../../types/components';
-import { ButtonLabel } from '../../../constants';
+import { ButtonLabel, HistoryRoute } from '../../../constants';
 import { useDispatch } from 'react-redux';
 import { changeSort } from '../../../store/actions';
+import { useHistory } from 'react-router-dom';
+import useQuery from '../../../hooks/use-query/use-query';
 
 
 function CatalogSort(): JSX.Element {
   const dispatch = useDispatch();
-  const [sort, setSort] = useState<Sort>({type: '', order: ''});
+  const history = useHistory();
+  const query = useQuery();
+  const typeQuery = query.get(HistoryRoute.Sort);
+  const orderQuery = query.get(HistoryRoute.Order);
+
+  const [sort, setSort] = useState<Sort>({
+    type: typeQuery || '',
+    order: orderQuery || '',
+  });
   const { type, order } = sort;
 
   const typeButtonsData = [
@@ -28,6 +38,11 @@ function CatalogSort(): JSX.Element {
     const newSort = order ? { ...sort, type: currentType } :
       { order: ButtonLabel.Descending, type: currentType };
     setSort(newSort);
+    query.set(HistoryRoute.Sort, newSort.type);
+    if (newSort.order) {
+      query.set(HistoryRoute.Order, newSort.order);
+    }
+    history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
   };
 
   const onOrderButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
@@ -38,6 +53,9 @@ function CatalogSort(): JSX.Element {
     const newSort = type ? { ...sort, order: currentOrder } :
       { type: ButtonLabel.Price, order: currentOrder };
     setSort(newSort);
+    query.set(HistoryRoute.Order, newSort.order);
+    query.set(HistoryRoute.Sort, newSort.type);
+    history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
   };
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllOffersAction, fetchPriceOffersAction } from '../../../store/api-actions/data-offers/data-offers';
 import { getSort } from '../../../store/reducers/state-sort/selectors';
 import { getFilterPrice } from '../../../store/reducers/state-filter/selectors';
-import { QueryRoute, OFFERS_TO_SHOW } from '../../../constants';
+import { QueryRoute, INITIAL_PAGE, OFFERS_TO_SHOW, HistoryRoute } from '../../../constants';
 import { AppRoute } from '../../../constants';
 
 import {
@@ -31,11 +31,12 @@ import {
 } from '../../components';
 
 import useQuery from '../../../hooks/use-query/use-query';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 function CatalogMainSection(): JSX.Element {
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const queryUrl = useQuery();
 
   const { query } = useParams<{ query: string }>();
@@ -66,6 +67,10 @@ function CatalogMainSection(): JSX.Element {
   const prefix = filterSortQuery.length ? '?' : '';
   const historyQuery = AppRoute.Catalog + page + prefix + filterSortQuery;
 
+  const pageToPush = query ? page : INITIAL_PAGE;
+  useEffect(() => {
+    history.push({ pathname: `${HistoryRoute.PagePathName}${pageToPush}`, search: queryUrl.toString()});
+  }, []);
 
   useEffect(() => {
     dispatch(fetchAllOffersAction(allDataQuery));

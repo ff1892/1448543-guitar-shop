@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { OFFERS_TO_SHOW, AppRoute } from '../../../constants';
 import useQuery from '../../../hooks/use-query/use-query';
 
@@ -14,7 +13,6 @@ const pagintationSettings = {
 const {
   offersToShow,
   linksToShow,
-  initialPage,
   initialStep,
 } = pagintationSettings;
 
@@ -26,7 +24,6 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
   const history = useHistory();
   const queryUrl = useQuery();
   const { query } = useParams<{ query: string }>();
-  const [page, setPage] = useState<number>(parseInt(query, 10) || initialPage);
   const [step, setStep] = useState<number>(initialStep);
 
   const totalPages = Math.ceil(offers / offersToShow);
@@ -39,24 +36,17 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
   const onPageClick = (evt: MouseEvent<HTMLElement>): void => {
     evt.preventDefault();
     const currentPageNumber = parseInt(evt.currentTarget.innerText, 10);
-    setPage(currentPageNumber);
     history.push({ pathname: `page_${currentPageNumber}`, search: queryUrl.toString() });
   };
 
   const onPrevClick = (): void => {
-    setPage((step - 1) * linksToShow);
     setStep((prevStep) => prevStep - 1);
   };
 
   const onNextClick = (evt: MouseEvent<HTMLElement>): void => {
     evt.preventDefault();
-    setPage( step * linksToShow + 1);
     setStep((prevStep) => prevStep + 1);
   };
-
-  useEffect(() => {
-    history.push({ pathname: `page_${page}`, search: queryUrl.toString() });
-  }, []);
 
 
   return (

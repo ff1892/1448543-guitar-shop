@@ -1,5 +1,4 @@
 import { renderHook } from '@testing-library/react-hooks';
-
 import useDebounce from './use-debounce';
 
 describe('useDebounce()', () => {

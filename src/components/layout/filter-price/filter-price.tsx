@@ -28,8 +28,8 @@ function FilterPrice(): JSX.Element {
   const minPriceRef = useRef<HTMLInputElement | null>(null);
   const maxPriceRef = useRef<HTMLInputElement | null>(null);
 
-  const minQuery = query.get('price_gte') || '';
-  const maxQuery = query.get('price_lte') || '';
+  const minQuery = query.get(HistoryRoute.MinPrice) || '';
+  const maxQuery = query.get(HistoryRoute.MaxPrice) || '';
 
   const [currentMin, setCurrentMin] = useState<string>(minQuery);
   const [currentMax, setCurrentMax] = useState<string>(maxQuery);
@@ -47,13 +47,13 @@ function FilterPrice(): JSX.Element {
         );
         minPriceRef.current.reportValidity();
         setCurrentMin(minInput);
-        query.set('price_gte', minInput);
+        query.set(HistoryRoute.MinPrice, minInput);
         dispatch(changePage(INITIAL_PAGE));
         history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
         return;
       }
       setCurrentMin('');
-      query.delete('price_gte');
+      query.delete(HistoryRoute.MinPrice);
       history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
     }
   };
@@ -73,11 +73,11 @@ function FilterPrice(): JSX.Element {
         minLeave = maxInputNumber.toString();
       }
       setCurrentMin(minLeave);
-      query.set('price_gte', minLeave);
+      query.set(HistoryRoute.MinPrice, minLeave);
       history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
       return;
     }
-    query.delete('price_gte');
+    query.delete(HistoryRoute.MinPrice);
     history.push({ pathname: pathname, search: query.toString() });
   };
 
@@ -92,12 +92,12 @@ function FilterPrice(): JSX.Element {
         maxPriceRef.current.reportValidity();
         setCurrentMax(maxInput);
         dispatch(changePage(INITIAL_PAGE));
-        query.set('price_lte', maxInput);
+        query.set(HistoryRoute.MaxPrice, maxInput);
         history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
         return;
       }
       setCurrentMax('');
-      query.delete('price_lte');
+      query.delete(HistoryRoute.MaxPrice);
       history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
     }
   };
@@ -117,11 +117,11 @@ function FilterPrice(): JSX.Element {
         maxLeave = minInputNumber.toString();
       }
       setCurrentMax(maxLeave);
-      query.set('price_lte', maxLeave);
+      query.set(HistoryRoute.MaxPrice, maxLeave);
       history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
       return;
     }
-    query.delete('price_lte');
+    query.delete(HistoryRoute.MaxPrice);
     history.push({ pathname: pathname, search: query.toString() });
   };
 

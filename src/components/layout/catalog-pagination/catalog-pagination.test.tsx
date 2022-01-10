@@ -1,10 +1,8 @@
-import * as Redux from 'react-redux';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import userEvent from '@testing-library/user-event';
 import CatalogPagination from './catalog-pagination';
 
 const mockStore = configureMockStore();
@@ -25,23 +23,5 @@ describe('Component: CatalogPagination', () => {
   it('should render correctly', () => {
     render(fakeCatalogPagination);
     expect(screen.getByTestId(/pagination/i)).toBeInTheDocument();
-  });
-
-  it('should dispach an action when fetches page state', () => {
-    const dispatch = jest.fn();
-    const useDispatch = jest.spyOn(Redux, 'useDispatch');
-    useDispatch.mockReturnValue(dispatch);
-    render(fakeCatalogPagination);
-    expect(dispatch).toBeCalledTimes(1);
-  });
-
-  it('should dispach an action when user changes page', () => {
-    const dispatch = jest.fn();
-    const useDispatch = jest.spyOn(Redux, 'useDispatch');
-    useDispatch.mockReturnValue(dispatch);
-    render(fakeCatalogPagination);
-    userEvent.click(screen.getByTestId(/page 2/i));
-    userEvent.click(screen.getByTestId(/page 3/i));
-    expect(dispatch).toBeCalledTimes(2);
   });
 });

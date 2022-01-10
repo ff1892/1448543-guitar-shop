@@ -1,4 +1,4 @@
-import { filterGuitarsData, filterStringsData} from '../../../constants';
+import { filterGuitarsData, filterStringsData, HistoryRoute} from '../../../constants';
 import { getIsTypeMatchesStrings } from '../../../utils/common';
 import { FilterTypeItem } from '../../components';
 import useQuery from '../../../hooks/use-query/use-query';
@@ -6,7 +6,7 @@ import useQuery from '../../../hooks/use-query/use-query';
 function FilterType (): JSX.Element {
 
   const query = useQuery();
-  const checkedStrings = query.getAll('stringCount');
+  const checkedStrings = query.getAll(HistoryRoute.StringCount);
 
   return (
     <fieldset className="catalog-filter__block" data-testid="filter type">

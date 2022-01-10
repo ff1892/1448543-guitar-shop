@@ -11,7 +11,9 @@ export enum ApiRoute {
 
 export enum AppRoute {
   Main = '/',
-  Catalog = '/catalog/page_',
+  Catalog = '/catalog',
+  InitialPage = '/page_1',
+  Page = '/page_',
   Guitars= '/guitars',
   About='/about',
   Shops='/shops',
@@ -31,6 +33,13 @@ export enum QueryRoute {
 
 export enum HistoryRoute {
   InitialPagePathname = 'page_1',
+  PagePathName = 'page_',
+  StringCount = 'stringCount',
+  Type = 'type',
+  MinPrice = 'price_gte',
+  MaxPrice = 'price_lte',
+  Sort = 'sort',
+  Order = 'order',
 }
 
 export enum ButtonLabel {

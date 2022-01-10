@@ -16,7 +16,7 @@ function FilterStringsItem ({ stringsCount, disabled }: FilterStringsItemProps):
   const dispatch = useDispatch();
   const history = useHistory();
   const query = useQuery();
-  const checkedItems = query.getAll('stringCount');
+  const checkedItems = query.getAll(HistoryRoute.StringCount);
   const { pathname } = useLocation();
 
   const [isChecked, setIsChecked] = useState<boolean>(
@@ -25,9 +25,9 @@ function FilterStringsItem ({ stringsCount, disabled }: FilterStringsItemProps):
 
   useEffect(() => {
     if (disabled && checkedItems.includes(stringsCount)) {
-      query.delete('stringCount');
+      query.delete(HistoryRoute.StringCount);
       const checkedStrings = checkedItems.filter((item) => item !== stringsCount);
-      checkedStrings.forEach((item) => query.append('stringCount', item));
+      checkedStrings.forEach((item) => query.append(HistoryRoute.StringCount, item));
       history.replace({ pathname: pathname, search: query.toString() });
     }
     setIsChecked(checkedItems.includes(stringsCount) && !disabled);
@@ -36,21 +36,23 @@ function FilterStringsItem ({ stringsCount, disabled }: FilterStringsItemProps):
   const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { checked } = evt.target;
     setIsChecked(checked);
-    query.delete('stringCount');
+    query.delete(HistoryRoute.StringCount);
 
     if (checked) {
       checkedItems.push(stringsCount);
-      checkedItems.forEach((item) => query.append('stringCount', item));
+      checkedItems.forEach((item) => query.append(HistoryRoute.StringCount, item));
     } else {
       const checkedStrings = checkedItems.filter((item) => stringsCount !== item);
-      checkedStrings.forEach((item) => query.append('stringCount', item));
+      checkedStrings.forEach((item) => query.append(HistoryRoute.StringCount, item));
     }
     dispatch(changePage(INITIAL_PAGE));
     history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
   };
 
   return(
-    <div className="form-checkbox catalog-filter__block-item">
+    <div className="form-checkbox catalog-filter__block-item"
+      data-testid="filter strings item"
+    >
       <input
         className="visually-hidden"
         type="checkbox"
