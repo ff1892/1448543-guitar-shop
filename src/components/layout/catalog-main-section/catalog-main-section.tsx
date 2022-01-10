@@ -70,7 +70,7 @@ function CatalogMainSection(): JSX.Element {
   const pageToPush = query ? page : INITIAL_PAGE;
   useEffect(() => {
     history.push({ pathname: `${HistoryRoute.PagePathName}${pageToPush}`, search: queryUrl.toString()});
-  }, []);
+  }, [history, pageToPush, queryUrl]);
 
   useEffect(() => {
     dispatch(fetchAllOffersAction(allDataQuery));
