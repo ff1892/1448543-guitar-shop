@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
 import { fetchAllOffersAction, fetchPriceOffersAction } from '../../../store/api-actions/data-offers/data-offers';
 import { getSort } from '../../../store/reducers/state-sort/selectors';
-import { getFilterType, getFilterStrings, getFilterPrice } from '../../../store/reducers/state-filter/selectors';
-import { getPage } from '../../../store/reducers/state-page/selectors';
+import { getFilterPrice } from '../../../store/reducers/state-filter/selectors';
 import { QueryRoute, OFFERS_TO_SHOW } from '../../../constants';
 import { AppRoute } from '../../../constants';
 
@@ -32,19 +30,22 @@ import {
   ErrorWrapper
 } from '../../components';
 
+import useQuery from '../../../hooks/use-query/use-query';
+import { useParams } from 'react-router-dom';
+
 function CatalogMainSection(): JSX.Element {
 
-  const history = useHistory();
   const dispatch = useDispatch();
+  const queryUrl = useQuery();
 
-  const search = useLocation().search;
-  const searchTypes = new URLSearchParams(search).getAll('type');
+  const { query } = useParams<{ query: string }>();
+  const page = parseInt(query, 10);
 
-  const page = useSelector(getPage);
   const sort = useSelector(getSort);
   const price = useSelector(getFilterPrice);
-  const types = useSelector(getFilterType) || searchTypes;
-  const strings = useSelector(getFilterStrings);
+
+  const types = queryUrl.getAll('type');
+  const strings = queryUrl.getAll('stringCount');
 
   const pageQuery = getPageQuery(page);
   const sortQuery = getSortQuery(sort);
@@ -69,8 +70,7 @@ function CatalogMainSection(): JSX.Element {
   useEffect(() => {
     dispatch(fetchAllOffersAction(allDataQuery));
     dispatch(fetchPriceOffersAction(priceDispatchQuery));
-    // history.push(historyQuery);
-  }, [dispatch, allDataQuery, historyQuery, priceDispatchQuery, history]);
+  }, [dispatch, allDataQuery, historyQuery, priceDispatchQuery]);
 
   return (
     <ErrorWrapper isError={isAllOffersError || isPriceOffersError}>

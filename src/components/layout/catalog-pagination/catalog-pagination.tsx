@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { MouseEvent, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { changePage } from '../../../store/actions';
 import { OFFERS_TO_SHOW, AppRoute } from '../../../constants';
+import useQuery from '../../../hooks/use-query/use-query';
 
 const pagintationSettings = {
   offersToShow: OFFERS_TO_SHOW,
@@ -23,8 +23,10 @@ type PaginationProps = {
 };
 
 function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
-  const dispatch = useDispatch();
-  const [page, setPage] = useState<number>(initialPage);
+  const history = useHistory();
+  const queryUrl = useQuery();
+  const { query } = useParams<{ query: string }>();
+  const [page, setPage] = useState<number>(parseInt(query, 10) || initialPage);
   const [step, setStep] = useState<number>(initialStep);
 
   const totalPages = Math.ceil(offers / offersToShow);
@@ -38,9 +40,10 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
     evt.preventDefault();
     const currentPageNumber = parseInt(evt.currentTarget.innerText, 10);
     setPage(currentPageNumber);
+    history.push({ pathname: `page_${currentPageNumber}`, search: queryUrl.toString() });
   };
 
-  const onPrevClick = (evt: MouseEvent<HTMLElement>): void => {
+  const onPrevClick = (): void => {
     setPage((step - 1) * linksToShow);
     setStep((prevStep) => prevStep - 1);
   };
@@ -52,8 +55,8 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
   };
 
   useEffect(() => {
-    dispatch(changePage(page));
-  }, [dispatch, page]);
+    history.push({ pathname: `page_${page}`, search: queryUrl.toString() });
+  }, []);
 
 
   return (
@@ -70,7 +73,7 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
           </li> }
         {
           sectionPages.map((pageNumber) => (
-            <li className={`pagination__page ${pageNumber === page ? 'pagination__page--active': ''}`}
+            <li className={`pagination__page ${pageNumber === parseInt(query, 10) ? 'pagination__page--active': ''}`}
               key={pageNumber}
             >
               <Link

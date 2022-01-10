@@ -27,7 +27,10 @@ export enum QueryRoute {
   MinPrice = '&price_gte=',
   MaxPrice = '&price_lte=',
   Similiar = 'name_like=',
+}
 
+export enum HistoryRoute {
+  InitialPagePathname = 'page_1',
 }
 
 export enum ButtonLabel {

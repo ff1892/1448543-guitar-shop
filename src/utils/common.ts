@@ -63,8 +63,8 @@ export const getPageQuery = (query: number): string => `&_start=${(query - 1) * 
 
 
 export const validatePrice = (password: string): string => {
-  const passwordReg = /^[0-9]*$/;
-  if (passwordReg.test(password)) {
+  const numberReg = /^[0-9]*$/;
+  if (numberReg.test(password)) {
     return '';
   }
   return 'Укажите положительное число';

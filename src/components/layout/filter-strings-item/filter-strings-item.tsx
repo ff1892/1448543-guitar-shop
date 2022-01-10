@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { changePage } from '../../../store/actions';
 import useQuery from '../../../hooks/use-query/use-query';
-import { INITIAL_PAGE } from '../../../constants';
-
+import { INITIAL_PAGE, HistoryRoute } from '../../../constants';
 
 type FilterStringsItemProps = {
   stringsCount: string,
@@ -47,7 +46,7 @@ function FilterStringsItem ({ stringsCount, disabled }: FilterStringsItemProps):
       checkedStrings.forEach((item) => query.append('stringCount', item));
     }
     dispatch(changePage(INITIAL_PAGE));
-    history.push({ pathname: pathname, search: query.toString() });
+    history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
   };
 
   return(

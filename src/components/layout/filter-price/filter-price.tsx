@@ -9,101 +9,120 @@ import { getPriceOffers, getPriceOffersIsLoaded } from '../../../store/reducers/
 import { validatePrice } from '../../../utils/common';
 import { changeFilterPrice } from '../../../store/actions';
 import useDebounce from '../../../hooks/use-debounce/use-debounce';
-import { INITIAL_PAGE } from '../../../constants';
+import { HistoryRoute, INITIAL_PAGE } from '../../../constants';
 import { changePage } from '../../../store/actions';
-import { getPage } from '../../../store/reducers/state-page/selectors';
+import useQuery from '../../../hooks/use-query/use-query';
+import { useHistory, useLocation } from 'react-router-dom';
 
 function FilterPrice(): JSX.Element {
 
   const dispatch = useDispatch();
+  const query = useQuery();
+  const history = useHistory();
+  const { pathname } = useLocation();
+
   const priceOffers = useSelector(getPriceOffers);
-  const isLoaded = useSelector(getPriceOffersIsLoaded);
-  const page = useSelector(getPage);
   const [minPrice, maxPrice] = [priceOffers[0].price, priceOffers[priceOffers.length - 1].price];
+
+  const isLoaded = useSelector(getPriceOffersIsLoaded);
   const minPriceRef = useRef<HTMLInputElement | null>(null);
   const maxPriceRef = useRef<HTMLInputElement | null>(null);
 
-  const [currentMin, setCurrentMin] = useState<string>('');
-  const [currentMax, setCurrentMax] = useState<string>('');
+  const minQuery = query.get('price_gte') || '';
+  const maxQuery = query.get('price_lte') || '';
+
+  const [currentMin, setCurrentMin] = useState<string>(minQuery);
+  const [currentMax, setCurrentMax] = useState<string>(maxQuery);
+
   const debauncedMin = useDebounce<string>(currentMin, 500);
   const debauncedMax = useDebounce<string>(currentMax, 500);
 
   const onMinPriceChange = (evt: ChangeEvent<HTMLInputElement>): void => {
     if (minPriceRef.current) {
-      if (page !== INITIAL_PAGE) {
-        dispatch(changePage(INITIAL_PAGE));
-      }
-      const minInput = minPriceRef.current.value;
-      const minInputNumber = parseInt(minInput, 10);
-      minPriceRef.current.setCustomValidity(
-        validatePrice(minInput),
-      );
-      if (minInputNumber >= minPrice) {
+      const minInput = minPriceRef.current.value.replace(/^[0-]+/, '');
+
+      if (minInput) {
+        minPriceRef.current.setCustomValidity(
+          validatePrice(minInput),
+        );
+        minPriceRef.current.reportValidity();
         setCurrentMin(minInput);
+        query.set('price_gte', minInput);
+        dispatch(changePage(INITIAL_PAGE));
+        history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
+        return;
       }
-      minPriceRef.current.reportValidity();
+      setCurrentMin('');
+      query.delete('price_gte');
+      history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
     }
   };
 
   const onMinPriceLeave = (evt: FocusEvent<HTMLInputElement>): void => {
-    if (minPriceRef.current && maxPriceRef.current) {
-      const minInputNumber = parseInt(minPriceRef.current.value, 10);
-      const maxInputNumber = parseInt(maxPriceRef.current.value, 10);
+    if (currentMin !== '') {
+      const minInputNumber = parseInt(currentMin, 10);
+      const maxInputNumber = parseInt(currentMax, 10);
+      let minLeave = currentMin;
       if (minInputNumber < minPrice) {
-        minPriceRef.current.value = minPrice.toString();
-        setCurrentMin(minPriceRef.current.value);
+        minLeave = minPrice.toString();
       }
       if (minInputNumber > maxPrice) {
-        minPriceRef.current.value = maxPrice.toString();
-        setCurrentMin(minPriceRef.current.value);
+        minLeave = maxPrice.toString();
       }
-      if (minInputNumber > maxInputNumber && maxPriceRef.current.value !== '') {
-        minPriceRef.current.value = maxInputNumber.toString();
-        setCurrentMin(minPriceRef.current.value);
+      if (minInputNumber > maxInputNumber && currentMax !== '') {
+        minLeave = maxInputNumber.toString();
       }
-      if (minPriceRef.current.value === '') {
-        setCurrentMin('');
-      }
+      setCurrentMin(minLeave);
+      query.set('price_gte', minLeave);
+      history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
+      return;
     }
+    query.delete('price_gte');
+    history.push({ pathname: pathname, search: query.toString() });
   };
 
   const onMaxPriceChange = (evt: ChangeEvent<HTMLInputElement>): void => {
     if (maxPriceRef.current) {
-      if (page !== INITIAL_PAGE) {
-        dispatch(changePage(INITIAL_PAGE));
-      }
-      const maxInput = maxPriceRef.current.value;
-      const maxInputNumber = parseInt(maxInput, 10);
-      maxPriceRef.current.setCustomValidity(
-        validatePrice(maxInput),
-      );
-      if (maxInputNumber <= maxPrice && maxInputNumber >= minPrice) {
+      const maxInput = maxPriceRef.current.value.replace(/^[0-]+/, '');
+
+      if (maxInput) {
+        maxPriceRef.current.setCustomValidity(
+          validatePrice(maxInput),
+        );
+        maxPriceRef.current.reportValidity();
         setCurrentMax(maxInput);
+        dispatch(changePage(INITIAL_PAGE));
+        query.set('price_lte', maxInput);
+        history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
+        return;
       }
-      maxPriceRef.current.reportValidity();
+      setCurrentMax('');
+      query.delete('price_lte');
+      history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
     }
   };
 
   const onMaxPriceLeave = (evt: FocusEvent<HTMLInputElement>): void => {
-    if (maxPriceRef.current && minPriceRef.current) {
-      const minInputNumber = parseInt(minPriceRef.current.value, 10);
-      const maxInputNumber = parseInt(maxPriceRef.current.value, 10);
+    if (currentMax !== '') {
+      const minInputNumber = parseInt(currentMin, 10);
+      const maxInputNumber = parseInt(currentMax, 10);
+      let maxLeave = currentMax;
       if (maxInputNumber > maxPrice) {
-        maxPriceRef.current.value = maxPrice.toString();
-        setCurrentMax(maxPriceRef.current.value);
+        maxLeave = maxPrice.toString();
       }
       if (maxInputNumber < minPrice) {
-        maxPriceRef.current.value = minPrice.toString();
-        setCurrentMax(maxPriceRef.current.value);
+        maxLeave = minPrice.toString();
       }
-      if (maxInputNumber < minInputNumber && minPriceRef.current.value !== '') {
-        maxPriceRef.current.value = minInputNumber.toString();
-        setCurrentMax(maxPriceRef.current.value);
+      if (maxInputNumber < minInputNumber && currentMin !== '') {
+        maxLeave = minInputNumber.toString();
       }
-      if (maxPriceRef.current.value === '') {
-        setCurrentMax('');
-      }
+      setCurrentMax(maxLeave);
+      query.set('price_lte', maxLeave);
+      history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
+      return;
     }
+    query.delete('price_lte');
+    history.push({ pathname: pathname, search: query.toString() });
   };
 
   useEffect(() => {
@@ -127,6 +146,7 @@ function FilterPrice(): JSX.Element {
             onChange={onMinPriceChange}
             onBlur={onMinPriceLeave}
             ref={minPriceRef}
+            value={currentMin}
           />
         </div>
         <div className="form-input">
@@ -139,6 +159,7 @@ function FilterPrice(): JSX.Element {
             onChange={onMaxPriceChange}
             onBlur={onMaxPriceLeave}
             ref={maxPriceRef}
+            value={currentMax}
           />
         </div>
       </div>
