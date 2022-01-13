@@ -35,6 +35,13 @@ export const loadSimiliarOffers = createAction(
   }),
 );
 
+export const LoadSimiliarOffersSearch = createAction(
+  ActionType.LoadSimiliarOffersSearch,
+  (similiarOffersSearch: string) => ({
+    payload: similiarOffersSearch,
+  }),
+);
+
 export const loadSimiliarOffersError = createAction(ActionType.LoadSimiliarOffersError);
 
 export const changeSort = createAction(

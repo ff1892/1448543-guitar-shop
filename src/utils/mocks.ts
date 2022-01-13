@@ -57,6 +57,7 @@ export const getFakeStore = (): State => {
       isPriceOffersLoaded: true,
       isPriceOffersError: false,
       similiarOffers: fakeGuitarsNoComments,
+      similiarOffersSearch: '',
       isSimiliarOffersLoaded: true,
       isSimiliarOffersError: false,
     },

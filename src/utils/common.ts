@@ -1,5 +1,6 @@
 import { Sort, FilterGuitarType, FilterPrice } from '../types/components';
 import { ButtonLabel, QueryRoute, OFFERS_TO_SHOW } from '../constants';
+import { GuitarNoComments } from '../types/data';
 
 export const getFormattedPrice = (price: number): string => (
   `${price.toLocaleString() } ₽`
@@ -70,3 +71,10 @@ export const validatePrice = (password: string): string => {
   return 'Укажите положительное число';
 };
 
+export const filterSimiliarOffers = (offers: GuitarNoComments[], search: string): GuitarNoComments[] => {
+  if (search.length > 1) {
+    return offers;
+  }
+  const searchRegExp = new RegExp(`^${search.toLowerCase()}`);
+  return offers.filter(({ name }) => name.toLowerCase().match(searchRegExp));
+};

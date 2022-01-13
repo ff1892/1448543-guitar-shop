@@ -10,6 +10,7 @@ export enum ActionType {
   LoadPriceOffers = 'data/LoadPriceOffers',
   LoadPriceOffersError = 'data/LoadPriceOffersError',
   LoadSimiliarOffers = 'data/LoadSimiliarOffers',
+  LoadSimiliarOffersSearch = 'data/LoadSimiliarOffersSearch',
   LoadSimiliarOffersError = 'data/LoadSimiliarOffersError',
   ChangeSort = 'state/ChangeSort',
   ChangeFilterType = 'state/ChangeFilterType',

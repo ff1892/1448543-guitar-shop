@@ -24,6 +24,7 @@ const state: DataOffers = {
   isPriceOffersLoaded: false,
   isPriceOffersError: false,
   similiarOffers: [],
+  similiarOffersSearch: '',
   isSimiliarOffersLoaded: false,
   isSimiliarOffersError: false,
 };

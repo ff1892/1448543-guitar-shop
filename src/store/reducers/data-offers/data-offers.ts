@@ -7,8 +7,11 @@ import {
   loadPriceOffers,
   loadPriceOffersError,
   loadSimiliarOffers,
-  loadSimiliarOffersError
+  loadSimiliarOffersError,
+  LoadSimiliarOffersSearch
 } from '../../actions';
+
+import { filterSimiliarOffers } from '../../../utils/common';
 
 const initialState: DataOffers = {
   totalCount: 0,
@@ -19,6 +22,7 @@ const initialState: DataOffers = {
   isPriceOffersLoaded: false,
   isPriceOffersError: false,
   similiarOffers: [],
+  similiarOffersSearch: '',
   isSimiliarOffersLoaded: false,
   isSimiliarOffersError: false,
 };
@@ -44,9 +48,13 @@ export const dataOffers = createReducer(initialState, (builder) => {
     .addCase(loadPriceOffersError, (state, _action) => {
       state.isPriceOffersError = true;
     })
+    .addCase(LoadSimiliarOffersSearch, (state, action) => {
+      state.similiarOffersSearch = action.payload;
+    })
     .addCase(loadSimiliarOffers, (state, action) => {
+      state.isSimiliarOffersLoaded= false;
       state.isSimiliarOffersError = false;
-      state.similiarOffers = action.payload;
+      state.similiarOffers = filterSimiliarOffers(action.payload, state.similiarOffersSearch);
       state.isSimiliarOffersLoaded = true;
     })
     .addCase(loadSimiliarOffersError, (state, _action) => {

@@ -11,6 +11,7 @@ export type DataOffers = {
   isPriceOffersLoaded: boolean,
   isPriceOffersError: boolean,
   similiarOffers: GuitarNoComments[],
+  similiarOffersSearch: string,
   isSimiliarOffersLoaded: boolean,
   isSimiliarOffersError: boolean,
 };
