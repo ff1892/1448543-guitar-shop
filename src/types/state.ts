@@ -27,7 +27,7 @@ export type StateFilter = {
 };
 
 export type StatePage = {
-  page: number,
+  page: number | null;
 };
 
 export type State = RootState;

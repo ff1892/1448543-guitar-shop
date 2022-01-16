@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { MouseEvent, useEffect, useState } from 'react';
 import { OFFERS_TO_SHOW, AppRoute, HistoryRoute } from '../../../constants';
 import useQuery from '../../../hooks/use-query/use-query';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPage } from '../../../store/reducers/state-page/selectors';
+import { changePage } from '../../../store/actions';
 
 const pagintationSettings = {
   offersToShow: OFFERS_TO_SHOW,
@@ -24,10 +28,12 @@ type PaginationProps = {
 function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
   const history = useHistory();
   const queryUrl = useQuery();
+  const dispatch = useDispatch();
   const { query } = useParams<{ query: string }>();
 
-  const [page, setPage] = useState<number>(
-    query ? parseInt(query, 10) : initialPage);
+  const storePage = useSelector(getPage);
+  const queryNumber = query ? parseInt(query, 10): null;
+  const currentStatePage = storePage || queryNumber || initialPage;
 
   const [step, setStep] = useState<number>(initialStep);
 
@@ -40,34 +46,34 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
   const onPageClick = (evt: MouseEvent<HTMLElement>): void => {
     evt.preventDefault();
     const currentPageNumber = parseInt(evt.currentTarget.innerText, 10);
-    setPage(currentPageNumber);
+    dispatch(changePage(currentPageNumber));
   };
 
   const onPrevClick = (evt: MouseEvent<HTMLElement>): void => {
     evt.preventDefault();
-    if (page % linksToShow === 1) {
+    if (currentStatePage % linksToShow === 1) {
       setStep((prevStep) => prevStep - 1);
     }
-    setPage((prevPage) => prevPage - 1);
+    dispatch(changePage(currentStatePage - 1));
   };
 
   const onNextClick = (evt: MouseEvent<HTMLElement>): void => {
     evt.preventDefault();
-    if (page % linksToShow === 0) {
+    if (currentStatePage % linksToShow === 0) {
       setStep((prevStep) => prevStep + 1);
     }
-    setPage((prevPage) => prevPage + 1);
+    dispatch(changePage(currentStatePage + 1));
   };
 
   useEffect(() => {
-    history.push({ pathname: `${HistoryRoute.PagePathName}${page}`, search: queryUrl.toString() });
-  }, [history, queryUrl, page]);
+    history.push({ pathname: `${HistoryRoute.PagePathName}${currentStatePage}`, search: queryUrl.toString() });
+  }, [history, queryUrl, currentStatePage]);
 
 
   return (
     <div className="pagination page-content__pagination" data-testid="pagination">
       <ul className="pagination__list">
-        { page !== initialPage &&
+        {currentStatePage !== initialPage &&
           <li className="pagination__page pagination__page--prev" id="prev">
             <Link className="link pagination__page-link"
               to='/'
@@ -78,7 +84,7 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
           </li> }
         {
           sectionPages.map((pageNumber) => (
-            <li className={`pagination__page ${pageNumber === page ? 'pagination__page--active': ''}`}
+            <li className={`pagination__page ${pageNumber === currentStatePage ? 'pagination__page--active': ''}`}
               key={pageNumber}
             >
               <Link
@@ -92,7 +98,7 @@ function CatalogPagination ({ offers }: PaginationProps): JSX.Element {
             </li>
           ))
         }
-        { page !== totalPages &&
+        {currentStatePage !== totalPages &&
           <li className="pagination__page pagination__page--next" id="next">
             <Link className="link pagination__page-link"
               to='/'

@@ -3,7 +3,7 @@ import { StatePage } from '../../../types/state';
 import { changePage } from '../../actions';
 
 const initialState: StatePage = {
-  page: 1,
+  page: null,
 };
 
 export const statePage = createReducer(initialState, (builder) => {
