@@ -1,7 +1,8 @@
 import { Guitar } from '../../../types/data';
-import { StarsRating } from '../../components';
-import {capitalizeString } from '../../../utils/common';
-import { GuitarType } from '../../../constants';
+import {
+  StarsRating,
+  OfferTabs
+} from '../../components';
 
 type OfferDetailsProps = {
   offer: Guitar,
@@ -18,15 +19,10 @@ function OfferDetails ({ offer }: OfferDetailsProps): JSX.Element {
     previewImg,
     name,
     rating,
-    vendorCode,
-    type,
-    stringCount,
-    description,
     price,
   } = offer;
 
   const formattedPrice = price.toLocaleString();
-  const formattedType = GuitarType[capitalizeString(type)];
 
   return (
     <div className="product-container">
@@ -45,35 +41,7 @@ function OfferDetails ({ offer }: OfferDetailsProps): JSX.Element {
           <span className="rate__count"></span>
           <span className="rate__message"></span>
         </div>
-        <div className="tabs">
-          <a className="button button--medium tabs__button" href="#characteristics">
-            Характеристики
-          </a>
-          <a className="button button--black-border button--medium tabs__button" href="#description">
-            Описание
-          </a>
-          <div className="tabs__content" id="characteristics">
-            <table className="tabs__table">
-              <tbody>
-                <tr className="tabs__table-row">
-                  <td className="tabs__title">Артикул:</td>
-                  <td className="tabs__value">{vendorCode}</td>
-                </tr>
-                <tr className="tabs__table-row">
-                  <td className="tabs__title">Тип:</td>
-                  <td className="tabs__value">{formattedType}</td>
-                </tr>
-                <tr className="tabs__table-row">
-                  <td className="tabs__title">Количество струн:</td>
-                  <td className="tabs__value">{stringCount} струнная</td>
-                </tr>
-              </tbody>
-            </table>
-            <p className="tabs__product-description hidden">
-              {description}
-            </p>
-          </div>
-        </div>
+        <OfferTabs offer={offer}/>
       </div>
       <div className="product-container__price-wrapper">
         <p className="product-container__price-info product-container__price-info--title">Цена:</p>

@@ -17,6 +17,8 @@ export enum ActionType {
   ChangeFilterStrings = 'state/ChangeFilterStrings',
   ChangeFilterPrice = 'state/ChangeFilterPrice',
   ChangePage = 'state/ChangePage',
+  LoadCurrentOffer = 'data/LoadCurrentOffer',
+  LoadCurrentOfferError = 'data/LoadCurrentOfferError',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

@@ -24,5 +24,6 @@ export { default as NoOffers } from './layout/no-offers/no-offers';
 export { default as Offer } from './layout/offer/offer';
 export { default as OfferNavigation } from './layout/offer-navigation/offer-navigation';
 export { default as OfferDetails } from './layout/offer-details/offer-details';
+export { default as OfferTabs } from './layout/offer-tabs/offer-tabs';
 export { default as CommentList } from './layout/comment-list/comment-list';
 export { default as Comment } from './layout/comment/comment';

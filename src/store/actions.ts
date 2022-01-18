@@ -42,7 +42,8 @@ export const LoadSimiliarOffersSearch = createAction(
   }),
 );
 
-export const loadSimiliarOffersError = createAction(ActionType.LoadSimiliarOffersError);
+export const loadSimiliarOffersError =
+  createAction(ActionType.LoadSimiliarOffersError);
 
 export const changeSort = createAction(
   ActionType.ChangeSort,
@@ -78,3 +79,13 @@ export const changePage = createAction(
     payload: page,
   }),
 );
+
+export const loadCurrentOffer = createAction(
+  ActionType.LoadCurrentOffer,
+  (currentOffer: Guitar) => ({
+    payload: currentOffer,
+  }),
+);
+
+export const loadCurrentOfferError =
+  createAction(ActionType.LoadCurrentOfferError);

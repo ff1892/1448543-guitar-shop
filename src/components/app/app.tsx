@@ -14,7 +14,7 @@ function App(): JSX.Element {
       <Route exact path={`${AppRoute.Catalog}${AppRoute.Page}:query`}>
         <MainPage />
       </Route>
-      <Route exact path={`${AppRoute.Guitars}/:id`}>
+      <Route exact path={`${AppRoute.Guitars}/:guitarId`}>
         <OfferPage />
       </Route>
       <Route>

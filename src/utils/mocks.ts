@@ -72,5 +72,10 @@ export const getFakeStore = (): State => {
     STATE_PAGE: {
       page: datatype.number(3),
     },
+    DATA_CURRENT_OFFER: {
+      currentOffer: fakeGuitars[0],
+      isCurrentOfferLoaded: true,
+      isCurrentOfferError: false,
+    },
   };
 };

@@ -30,4 +30,10 @@ export type StatePage = {
   page: number | null;
 };
 
+export type DataCurrentOffer = {
+  currentOffer: Guitar | null,
+  isCurrentOfferLoaded: boolean,
+  isCurrentOfferError: boolean,
+};
+
 export type State = RootState;

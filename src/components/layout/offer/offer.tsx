@@ -1,22 +1,26 @@
-import { mockOffer } from '../../../mock';
+import { Guitar } from '../../../types/data';
 import { sortCommentsByDate } from '../../../utils/common';
+
 import {
   OfferNavigation,
   OfferDetails,
   CommentList
 } from '../../components';
 
-function Offer (): JSX.Element {
+type OfferProps = {
+  offer: Guitar,
+};
 
-  const currentOffer = mockOffer;
-  const { name, id, comments } = currentOffer;
+function Offer ({ offer }: OfferProps): JSX.Element {
+
+  const { name, id, comments } = offer;
   const sortedComments = sortCommentsByDate(comments);
 
   return (
     <main className="page-content">
       <div className="container">
         <OfferNavigation name={name} id={id} />
-        <OfferDetails offer={currentOffer}/>
+        <OfferDetails offer={offer}/>
         <CommentList comments={sortedComments} />
       </div>
     </main>
