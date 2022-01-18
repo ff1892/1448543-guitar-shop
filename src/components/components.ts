@@ -27,3 +27,4 @@ export { default as OfferDetails } from './layout/offer-details/offer-details';
 export { default as OfferTabs } from './layout/offer-tabs/offer-tabs';
 export { default as CommentList } from './layout/comment-list/comment-list';
 export { default as Comment } from './layout/comment/comment';
+export { default as ModalComment } from './layout/modal-comment/modal-comment';

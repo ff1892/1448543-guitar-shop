@@ -1,6 +1,7 @@
 import { AppRoute } from '../../../constants';
 import { Link } from 'react-router-dom';
 import { SearchForm } from '../../components';
+import { INITIAL_PAGE } from '../../../constants';
 
 type HeaderProps = {
   isMainPage?: boolean,
@@ -19,7 +20,10 @@ function Header ({ isMainPage = false }: HeaderProps ): JSX.Element {
         <nav className="main-nav">
           <ul className="main-nav__list">
             <li>
-              <Link className={`link main-nav__link ${isMainPage ? 'link--current' : ''}`} to={AppRoute.Catalog}>
+              <Link
+                className={`link main-nav__link ${isMainPage ? 'link--current' : ''}`}
+                to={`${AppRoute.Catalog}${AppRoute.Page}${INITIAL_PAGE}`}
+              >
                 Каталог
               </Link>
             </li>

@@ -19,9 +19,11 @@ function OfferDetails ({ offer }: OfferDetailsProps): JSX.Element {
     previewImg,
     name,
     rating,
+    comments,
     price,
   } = offer;
 
+  const commentsCount = comments.length;
   const formattedPrice = price.toLocaleString();
 
   return (
@@ -38,7 +40,7 @@ function OfferDetails ({ offer }: OfferDetailsProps): JSX.Element {
             width={IconParam.Width}
             height={IconParam.Height}
           />
-          <span className="rate__count"></span>
+          <span className="rate__count">{commentsCount}</span>
           <span className="rate__message"></span>
         </div>
         <OfferTabs offer={offer}/>
