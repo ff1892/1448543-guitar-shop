@@ -5,8 +5,8 @@ import { internet, datatype, lorem, commerce } from 'faker';
 export const makeFakeComment = (): CommentGet => ({
   id: datatype.uuid(),
   userName: internet.userName(),
-  advantages: lorem.words(),
-  disadvantages: lorem.words(),
+  advantage: lorem.words(),
+  disadvantage: lorem.words(),
   comment: lorem.sentence(),
   rating: datatype.number(5),
   createAt: datatype.datetime().toLocaleDateString(),

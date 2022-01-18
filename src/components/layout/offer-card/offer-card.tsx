@@ -8,6 +8,11 @@ type OfferCardProps = {
   offer: Guitar,
 };
 
+enum IconParam {
+  Width = 12,
+  Height = 11,
+}
+
 function OfferCard({ offer }: OfferCardProps): JSX.Element {
 
   const {
@@ -26,7 +31,11 @@ function OfferCard({ offer }: OfferCardProps): JSX.Element {
       <img src={`../${previewImg}`} width="75" height="190" alt={name} />
       <div className="product-card__info">
         <div className="rate product-card__rate" aria-hidden="true">
-          <StarsRating rating={rating} />
+          <StarsRating
+            rating={rating}
+            width={IconParam.Width}
+            height={IconParam.Height}
+          />
           <span className="rate__count">
             { comments.length }
           </span>

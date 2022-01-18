@@ -1,6 +1,6 @@
 import { Sort, FilterGuitarType, FilterPrice } from '../types/components';
 import { ButtonLabel, QueryRoute, OFFERS_TO_SHOW } from '../constants';
-import { GuitarNoComments } from '../types/data';
+import { CommentGet, GuitarNoComments } from '../types/data';
 
 export const getFormattedPrice = (price: number): string => (
   `${price.toLocaleString() } ₽`
@@ -78,3 +78,20 @@ export const filterSimiliarOffers = (offers: GuitarNoComments[], search: string)
   const searchRegExp = new RegExp(`^${search.toLowerCase()}`);
   return offers.filter(({ name }) => name.toLowerCase().match(searchRegExp));
 };
+
+export const getDateString = (date: string): string => {
+  const commentDate = new Date(date);
+  return commentDate.toLocaleString('ru-Ru', { month: 'long', day: '2-digit' });
+};
+
+export const sortCommentsByDate = (comments: CommentGet[]): CommentGet[] => (
+  [...comments].sort((commentA, commentB) => {
+    const dateA = Date.parse(commentA.createAt);
+    const dateB = Date.parse(commentB.createAt);
+    return dateB - dateA;
+  })
+);
+
+export const capitalizeString = (string: string): string => (
+  string.replace(/^\w/, (c) => c.toUpperCase())
+);

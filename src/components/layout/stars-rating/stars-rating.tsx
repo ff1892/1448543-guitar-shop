@@ -2,9 +2,11 @@ import { MAX_RATING } from '../../../constants';
 
 type starsRatingProps = {
   rating: number,
+  width: number,
+  height: number,
 };
 
-function StarsRating({ rating }: starsRatingProps): JSX.Element {
+function StarsRating({ rating, width, height }: starsRatingProps): JSX.Element {
 
   const roundedRating = Math.round(rating);
 
@@ -18,7 +20,7 @@ function StarsRating({ rating }: starsRatingProps): JSX.Element {
     <>
       <span className="visually-hidden" data-testid="stars rating">Рейтинг:</span>
       { starsData.map(({ id, grade}) => (
-        <svg width="12" height="11" aria-hidden="true" key={id}>
+        <svg width={width} height={height} aria-hidden="true" key={id}>
           <use
             xlinkHref={roundedRating >= grade ? '#icon-full-star' : '#icon-star'}
           >

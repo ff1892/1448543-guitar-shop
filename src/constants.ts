@@ -68,3 +68,9 @@ export const filterGuitarsData: FilterGuitarType[] = [
 ];
 
 export const filterStringsData = ['4', '6', '7', '12'];
+
+export const GuitarType: { [key: string]: string } = {
+  'Electric': 'Электрогитара',
+  'Acoustic': 'Акустическая гитара',
+  'Ukulele': 'Укулеле',
+};

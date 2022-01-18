@@ -21,3 +21,8 @@ export { default as ErrorWrapper } from './layout/error-wrapper/error-wrapper';
 export { default as SvgSprite } from './layout/svg-sprite/svg-sprite';
 export { default as PageLayout } from './layout/page-layout/page-layout';
 export { default as NoOffers } from './layout/no-offers/no-offers';
+export { default as Offer } from './layout/offer/offer';
+export { default as OfferNavigation } from './layout/offer-navigation/offer-navigation';
+export { default as OfferDetails } from './layout/offer-details/offer-details';
+export { default as CommentList } from './layout/comment-list/comment-list';
+export { default as Comment } from './layout/comment/comment';
