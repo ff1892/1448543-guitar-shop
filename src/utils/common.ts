@@ -1,3 +1,4 @@
+import { RefObject } from 'react';
 import { Sort, FilterGuitarType, FilterPrice } from '../types/components';
 import { ButtonLabel, QueryRoute, OFFERS_TO_SHOW } from '../constants';
 import { CommentGet, GuitarNoComments } from '../types/data';
@@ -95,3 +96,19 @@ export const sortCommentsByDate = (comments: CommentGet[]): CommentGet[] => (
 export const capitalizeString = (string: string): string => (
   string.replace(/^\w/, (c) => c.toUpperCase())
 );
+
+export const resetInputText =
+  (ref: RefObject<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (ref.current) {
+      ref.current.value = '';
+    }
+  };
+
+export const getInputText =
+  (ref: RefObject<HTMLInputElement | HTMLTextAreaElement>) => {
+    const message = 'Пользователь ничего не написал';
+    if (ref.current) {
+      return ref.current.value.length ? ref.current.value : message;
+    }
+    return message;
+  };

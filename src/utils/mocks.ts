@@ -77,5 +77,8 @@ export const getFakeStore = (): State => {
       isCurrentOfferLoaded: true,
       isCurrentOfferError: false,
     },
+    DATA_COMMENT: {
+      commentStatus: 'UNKNOWN',
+    },
   };
 };

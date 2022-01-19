@@ -89,3 +89,10 @@ export const loadCurrentOffer = createAction(
 
 export const loadCurrentOfferError =
   createAction(ActionType.LoadCurrentOfferError);
+
+export const changeCommentStatus = createAction(
+  ActionType.ChangeUploadCommentStatus,
+  (commentStatus: string) => ({
+    payload: commentStatus,
+  }),
+);

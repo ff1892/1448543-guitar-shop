@@ -15,11 +15,13 @@ export type GuitarNoComments = Omit<Guitar, 'comments'>;
 
 export type CommentGet = {
   id: string,
+  createAt: string,
   userName: string,
   advantage: string,
   disadvantage: string,
   comment: string,
   rating: number,
-  createAt: string,
   guitarId: number,
 };
+
+export type CommentPost = Omit<CommentGet, 'id' | 'createAt'>;

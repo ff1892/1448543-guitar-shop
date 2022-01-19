@@ -36,4 +36,8 @@ export type DataCurrentOffer = {
   isCurrentOfferError: boolean,
 };
 
+export type DataComment = {
+  commentStatus: string,
+};
+
 export type State = RootState;

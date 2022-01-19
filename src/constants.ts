@@ -7,6 +7,7 @@ export const TOTAL_COUNT_HEADER = 'x-total-count';
 
 export enum ApiRoute {
   Guitars = '/guitars',
+  Comments = '/comments',
 }
 
 export enum AppRoute {
@@ -74,3 +75,10 @@ export const GuitarType: { [key: string]: string } = {
   'Acoustic': 'Акустическая гитара',
   'Ukulele': 'Укулеле',
 };
+
+export enum UploadStatus {
+  Unknown = 'UNKNOWN',
+  Posting = 'POSTING',
+  Completed = 'COMPLETED',
+  Error = 'ERROR',
+}

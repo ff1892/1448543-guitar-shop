@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useEffect, useCallback } from 'react';
 import { CommentGet } from '../../../types/data';
 import { Comment, ModalComment } from '../../components';
 
@@ -15,8 +14,12 @@ const commentsSettings = {
 function CommentList ({comments}: CommentListProps): JSX.Element {
 
   const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
+  const openModal = () => setIsVisibleModal(true);
+  const closeModal = () => setIsVisibleModal(false);
+
   const { initialStep, commentsToShow } = commentsSettings;
   const [step, setStep] = useState<number>(initialStep);
+
   const visibleCommentsCount = step * commentsToShow;
   const visibleComments = comments.slice(0, visibleCommentsCount);
   const isButtonShown = visibleCommentsCount < comments.length;
@@ -26,26 +29,24 @@ function CommentList ({comments}: CommentListProps): JSX.Element {
     setStep((prevStep) => prevStep + 1);
   };
 
-  const onEscKeyDown = (evt: { code: string; }): void => {
-    if (evt.code === 'Escape') {
-      closeModal();
-    }
-  };
-
-  const openModal = () => {
-    setIsVisibleModal(true);
-    document.addEventListener('keydown', onEscKeyDown);
-  };
-
-  const closeModal = () => {
-    setIsVisibleModal(false);
-    document.removeEventListener('keydown', onEscKeyDown);
-  };
+  const onEscKeyDown = useCallback(
+    (evt: KeyboardEvent) => {
+      if (evt.code === 'Escape') {
+        closeModal();
+      }
+    }, []);
 
   const onPostCommentClick = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     openModal();
   };
+
+  useEffect(() => {
+    if (isVisibleModal) {
+      document.addEventListener('keydown', onEscKeyDown);
+    }
+    return () => document.removeEventListener('keydown', onEscKeyDown);
+  }, [onEscKeyDown, isVisibleModal]);
 
 
   return (
@@ -59,7 +60,7 @@ function CommentList ({comments}: CommentListProps): JSX.Element {
           href="/"
           onClick={onPostCommentClick}
         >
-        Оставить отзыв
+          Оставить отзыв
         </a>
         {
           visibleComments.map((comment) => (
