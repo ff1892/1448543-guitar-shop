@@ -4,7 +4,8 @@ import {
   FormEvent,
   Fragment,
   useState,
-  useRef
+  useRef,
+  useEffect
 } from 'react';
 import { MAX_RATING, UploadStatus } from '../../../constants';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,6 +15,8 @@ import { CommentPost } from '../../../types/data';
 import { commentPostAction } from '../../../store/api-actions/data-comment/data-comment';
 import { fetchCurrentOfferAction } from '../../../store/api-actions/data-current-offer/data-current-offer';
 import { getCommentStatus } from '../../../store/reducers/data-comment/selectors';
+import { changeCommentStatus } from  '../../../store/actions';
+import { ButtonCross } from '../../components';
 
 type ModalCommentProps = {
   isVisible: boolean,
@@ -117,13 +120,25 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
     }
   };
 
+  const onModalClose = () => {
+    closeModal();
+    dispatch(changeCommentStatus(UploadStatus.Unknown));
+    resetForm();
+  };
+
+  useEffect(() => {
+    if (isCompleted) {
+      resetForm();
+    }
+  }, [isCompleted]);
+
   return (
     <>
       <div
         className={`modal modal--review modal-for-ui-kit ${isVisible && !isCompleted ? 'is-active ' : ''}`}
       >
         <div className="modal__wrapper">
-          <div className="modal__overlay" data-close-modal="" onClick={() => closeModal()}>
+          <div className="modal__overlay" data-close-modal="" onClick={onModalClose}>
           </div>
           <div className="modal__content">
             <h2 className="modal__header modal__header--review title title--medium">
@@ -222,21 +237,17 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
                 {!isPosting ? 'Отправить отзыв' : 'Отправляем...'}
               </button>
             </form>
-            <button
-              className="modal__close-btn button-cross"
-              type="button"
-              aria-label="Закрыть"
-              onClick={() => closeModal()}
-            >
-              <span className="button-cross__icon"></span>
-              <span className="modal__close-btn-interactive-area"></span>
-            </button>
+            <ButtonCross onButtonClick={onModalClose}/>
           </div>
         </div>
       </div>
       <div className={`modal modal--success modal-for-ui-kit ${isVisible && isCompleted ? 'is-active': ''}`}>
         <div className="modal__wrapper">
-          <div className="modal__overlay" data-close-modal></div>
+          <div
+            className="modal__overlay" data-close-modal
+            onClick={onModalClose}
+          >
+          </div>
           <div className="modal__content">
             <svg className="modal__icon" width="26" height="20" aria-hidden="true">
               <use xlinkHref="#icon-success"></use>
@@ -245,14 +256,7 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
             <div className="modal__button-container modal__button-container--review">
               <button className="button button--small modal__button modal__button--review">К покупкам!</button>
             </div>
-            <button
-              className="modal__close-btn button-cross"
-              type="button" aria-label="Закрыть"
-              onClick={() => closeModal()}
-            >
-              <span className="button-cross__icon"></span>
-              <span className="modal__close-btn-interactive-area"></span>
-            </button>
+            <ButtonCross onButtonClick={onModalClose} />
           </div>
         </div>
       </div>

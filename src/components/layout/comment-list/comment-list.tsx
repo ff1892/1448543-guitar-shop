@@ -1,6 +1,9 @@
 import { useState, MouseEvent, useEffect, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { CommentGet } from '../../../types/data';
+import { changeCommentStatus } from '../../../store/actions';
 import { Comment, ModalComment } from '../../components';
+import { UploadStatus } from '../../../constants';
 
 type CommentListProps = {
   comments: CommentGet[],
@@ -12,6 +15,8 @@ const commentsSettings = {
 };
 
 function CommentList ({comments}: CommentListProps): JSX.Element {
+
+  const dispatch = useDispatch();
 
   const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
   const openModal = () => setIsVisibleModal(true);
@@ -33,8 +38,9 @@ function CommentList ({comments}: CommentListProps): JSX.Element {
     (evt: KeyboardEvent) => {
       if (evt.code === 'Escape') {
         closeModal();
+        dispatch(changeCommentStatus(UploadStatus.Unknown));
       }
-    }, []);
+    }, [dispatch]);
 
   const onPostCommentClick = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
