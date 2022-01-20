@@ -1,6 +1,6 @@
 import { RefObject } from 'react';
 import { Sort, FilterGuitarType, FilterPrice } from '../types/components';
-import { ButtonLabel, QueryRoute, OFFERS_TO_SHOW } from '../constants';
+import { ButtonLabel, QueryRoute, OFFERS_TO_SHOW, NO_INPUT } from '../constants';
 import { CommentGet, GuitarNoComments } from '../types/data';
 
 export const getFormattedPrice = (price: number): string => (
@@ -106,9 +106,11 @@ export const resetInputText =
 
 export const getInputText =
   (ref: RefObject<HTMLInputElement | HTMLTextAreaElement>) => {
-    const message = 'Пользователь ничего не написал';
+    const message = ' ';
     if (ref.current) {
       return ref.current.value.trim().length ? ref.current.value : message;
     }
     return message;
   };
+
+export const hasInput = (input: string): boolean => input !== NO_INPUT;

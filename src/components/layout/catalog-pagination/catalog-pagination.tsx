@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { MouseEvent, useEffect, useState } from 'react';
 import { OFFERS_TO_SHOW, AppRoute, HistoryRoute } from '../../../constants';

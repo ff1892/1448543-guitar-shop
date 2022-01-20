@@ -1,5 +1,5 @@
 import { CommentGet } from '../../../types/data';
-import { getDateString } from '../../../utils/common';
+import { getDateString, hasInput } from '../../../utils/common';
 import { StarsRating } from '../../components';
 
 type CommentProps = {
@@ -22,6 +22,12 @@ function Comment ({userComment}: CommentProps): JSX.Element {
     comment,
   } = userComment;
 
+  const reviewTitles = [
+    {data: advantage, label: 'Преимущества'},
+    {data: disadvantage, label: 'Недостатки'},
+    {data: comment, label: 'Комментарий'},
+  ];
+
   const foramttedDate = getDateString(createAt);
 
   return (
@@ -43,18 +49,15 @@ function Comment ({userComment}: CommentProps): JSX.Element {
         <span className="rate__count"></span>
         <span className="rate__message"></span>
       </div>
-      <h4 className="review__title title title--lesser">Достоинства:</h4>
-      <p className="review__value">
-        {advantage}
-      </p>
-      <h4 className="review__title title title--lesser">Недостатки:</h4>
-      <p className="review__value">
-        {disadvantage}
-      </p>
-      <h4 className="review__title title title--lesser">Комментарий:</h4>
-      <p className="review__value">
-        {comment}
-      </p>
+      { reviewTitles.map(({data, label}) => (
+        hasInput(data) &&
+          <>
+            <h4 className="review__title title title--lesser">{`${label}:`}</h4>
+            <p className="review__value">
+              {data}
+            </p>
+          </>
+      ))}
     </div>
   );
 }

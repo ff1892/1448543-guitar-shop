@@ -52,7 +52,7 @@ function OfferDetails ({ offer }: OfferDetailsProps): JSX.Element {
         </p>
         <a
           className="button button--red button--big product-container__button"
-          href="#"
+          href="/"
         >
           Добавить в корзину
         </a>
