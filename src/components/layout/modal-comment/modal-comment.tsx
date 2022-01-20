@@ -280,7 +280,11 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
             </svg>
             <p className="modal__message">Спасибо за ваш отзыв!</p>
             <div className="modal__button-container modal__button-container--review">
-              <button className="button button--small modal__button modal__button--review">К покупкам!</button>
+              <button className="button button--small modal__button modal__button--review"
+                onClick={onModalClose}
+              >
+                К покупкам!
+              </button>
             </div>
             <ButtonCross onButtonClick={onModalClose} />
           </div>

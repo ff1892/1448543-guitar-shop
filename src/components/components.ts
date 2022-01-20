@@ -29,3 +29,4 @@ export { default as CommentList } from './layout/comment-list/comment-list';
 export { default as Comment } from './layout/comment/comment';
 export { default as ModalComment } from './layout/modal-comment/modal-comment';
 export { default as ButtonCross } from './layout/button-cross/button-cross';
+export { default as ModalWrapper } from './layout/modal-wrapper/modal-wrapper';

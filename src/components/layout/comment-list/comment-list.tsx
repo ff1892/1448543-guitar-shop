@@ -1,6 +1,6 @@
 import { useState, MouseEvent} from 'react';
 import { CommentGet } from '../../../types/data';
-import { Comment, ModalComment } from '../../components';
+import { Comment, ModalComment, ModalWrapper } from '../../components';
 
 
 type CommentListProps = {
@@ -72,11 +72,14 @@ function CommentList ({ comments }: CommentListProps): JSX.Element {
             Наверх
           </a>}
       </section>
-      <ModalComment
-        isVisible={isVisibleModal}
-        closeModal={closeModal}
-      />
+      <ModalWrapper isVisibleChild={isVisibleModal}>
+        <ModalComment
+          isVisible={isVisibleModal}
+          closeModal={closeModal}
+        />
+      </ModalWrapper>
     </>
+
   );
 }
 
