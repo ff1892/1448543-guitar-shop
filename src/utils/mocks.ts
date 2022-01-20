@@ -1,4 +1,4 @@
-import { Guitar, CommentGet, GuitarNoComments } from '../types/data';
+import { Guitar, CommentGet, GuitarNoComments, CommentPost } from '../types/data';
 import { State } from '../types/state';
 import { internet, datatype, lorem, commerce } from 'faker';
 
@@ -10,6 +10,15 @@ export const makeFakeComment = (): CommentGet => ({
   comment: lorem.sentence(),
   rating: datatype.number(5),
   createAt: datatype.datetime().toLocaleDateString(),
+  guitarId: datatype.number(),
+});
+
+export const makeFakeCommentPost = (): CommentPost => ({
+  userName: internet.userName(),
+  advantage: lorem.words(),
+  disadvantage: lorem.words(),
+  comment: lorem.sentence(),
+  rating: datatype.number(5),
   guitarId: datatype.number(),
 });
 
