@@ -108,7 +108,7 @@ export const getInputText =
   (ref: RefObject<HTMLInputElement | HTMLTextAreaElement>) => {
     const message = 'Пользователь ничего не написал';
     if (ref.current) {
-      return ref.current.value.length ? ref.current.value : message;
+      return ref.current.value.trim().length ? ref.current.value : message;
     }
     return message;
   };

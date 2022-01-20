@@ -1,9 +1,7 @@
-import { useState, MouseEvent, useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, MouseEvent} from 'react';
 import { CommentGet } from '../../../types/data';
-import { changeCommentStatus } from '../../../store/actions';
 import { Comment, ModalComment } from '../../components';
-import { UploadStatus } from '../../../constants';
+
 
 type CommentListProps = {
   comments: CommentGet[],
@@ -14,9 +12,7 @@ const commentsSettings = {
   commentsToShow: 3,
 };
 
-function CommentList ({comments}: CommentListProps): JSX.Element {
-
-  const dispatch = useDispatch();
+function CommentList ({ comments }: CommentListProps): JSX.Element {
 
   const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
   const openModal = () => setIsVisibleModal(true);
@@ -29,37 +25,23 @@ function CommentList ({comments}: CommentListProps): JSX.Element {
   const visibleComments = comments.slice(0, visibleCommentsCount);
   const isButtonShown = visibleCommentsCount < comments.length;
 
+  const hasComments = comments.length > 0;
+
   const onMoreButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     setStep((prevStep) => prevStep + 1);
   };
-
-  const onEscKeyDown = useCallback(
-    (evt: KeyboardEvent) => {
-      if (evt.code === 'Escape') {
-        closeModal();
-        dispatch(changeCommentStatus(UploadStatus.Unknown));
-      }
-    }, [dispatch]);
 
   const onPostCommentClick = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     openModal();
   };
 
-  useEffect(() => {
-    if (isVisibleModal) {
-      document.addEventListener('keydown', onEscKeyDown);
-    }
-    return () => document.removeEventListener('keydown', onEscKeyDown);
-  }, [onEscKeyDown, isVisibleModal]);
-
-
   return (
     <>
       <section className="reviews">
         <h3 className="reviews__title title title--bigger">
-        Отзывы
+          {hasComments ? 'Отзывы': 'Отзывов пока нет'}
         </h3>
         <a
           className="button button--red-border button--big reviews__sumbit-button"
@@ -80,12 +62,15 @@ function CommentList ({comments}: CommentListProps): JSX.Element {
         >
         Показать еще отзывы
         </button> }
-        <a
-          className="button button--up button--red-border button--big reviews__up-button"
-          href="#top"
-        >
-        Наверх
-        </a>
+        { hasComments &&
+          <a className="button button--up button--red-border button--big reviews__up-button"
+            href="#top"
+            style={{
+              zIndex: '2',
+            }}
+          >
+            Наверх
+          </a>}
       </section>
       <ModalComment
         isVisible={isVisibleModal}

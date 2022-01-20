@@ -5,10 +5,12 @@ import {
   Fragment,
   useState,
   useRef,
-  useEffect
+  useEffect,
+  useCallback
 } from 'react';
 import { MAX_RATING, UploadStatus } from '../../../constants';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { getCurrentOffer } from '../../../store/reducers/data-current-offer/selectors';
 import { resetInputText, getInputText } from '../../../utils/common';
 import { CommentPost } from '../../../types/data';
@@ -36,8 +38,8 @@ const ratingArray: number[] = new Array(MAX_RATING).fill(null).map((_value, inde
 function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element {
 
   const currentOffer = useSelector(getCurrentOffer);
+  const { guitarId } = useParams<{ guitarId: string }>();
   const commentStatus = useSelector(getCommentStatus);
-  const isUnknown = commentStatus === UploadStatus.Unknown;
   const isPosting = commentStatus === UploadStatus.Posting;
   const isCompleted = commentStatus === UploadStatus.Completed;
   const isError = commentStatus === UploadStatus.Error;
@@ -93,6 +95,8 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
     resetInputText(prosRef);
     resetInputText(consRef);
     resetInputText(commentRef);
+    setIsValidName(true);
+    setIsValidRating(true);
   };
 
   const getComment = (): CommentPost => ({
@@ -114,23 +118,34 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
     }
     const comment = getComment();
     dispatch(commentPostAction(comment));
-    if (currentOffer) {
-      dispatch(fetchCurrentOfferAction(
-        currentOffer.id.toString()));
-    }
   };
 
-  const onModalClose = () => {
+  const onModalClose = useCallback(() => {
     closeModal();
     dispatch(changeCommentStatus(UploadStatus.Unknown));
     resetForm();
-  };
+  }, [closeModal, dispatch]);
+
+  const onEscKeyDown = useCallback(
+    (evt: KeyboardEvent) => {
+      if (evt.code === 'Escape') {
+        onModalClose();
+      }
+    }, [onModalClose]);
 
   useEffect(() => {
     if (isCompleted) {
+      dispatch(fetchCurrentOfferAction(guitarId));
       resetForm();
     }
-  }, [isCompleted]);
+  }, [isCompleted, dispatch, guitarId]);
+
+  useEffect(() => {
+    if (isVisible) {
+      document.addEventListener('keydown', onEscKeyDown);
+    }
+    return () => document.removeEventListener('keydown', onEscKeyDown);
+  }, [onEscKeyDown, isVisible]);
 
   return (
     <>
@@ -147,8 +162,19 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
             <h3 className="modal__product-name title title--medium-20 title--uppercase">
               {currentOffer?.name}
             </h3>
-            <form
-              className="form-review"
+            {isError &&
+              <span
+                className="form-review__warning"
+                style={{
+                  textAlign: 'start',
+                  fontSize: '13px',
+                  lineHeight: '16px',
+                  fontWeight: '500',
+                }}
+              >
+                Ошибка. Не удалось отправить данные. <br /> Попробуйте еще раз.
+              </span>}
+            <form className="form-review"
               onSubmit={onFormSumbit}
             >
               <div className="form-review__wrapper">
