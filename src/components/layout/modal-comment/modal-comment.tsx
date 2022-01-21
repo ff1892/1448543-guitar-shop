@@ -37,8 +37,10 @@ const ratingArray: number[] = new Array(MAX_RATING).fill(null).map((_value, inde
 function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element {
 
   const currentOffer = useSelector(getCurrentOffer);
-  const { guitarId } = useParams<{ guitarId: string }>();
   const commentStatus = useSelector(getCommentStatus);
+
+  const { guitarId } = useParams<{ guitarId: string }>();
+
   const isPosting = commentStatus === UploadStatus.Posting;
   const isCompleted = commentStatus === UploadStatus.Completed;
   const isError = commentStatus === UploadStatus.Error;
@@ -150,6 +152,7 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
     <>
       <div
         className={`modal modal--review modal-for-ui-kit ${isVisible && !isCompleted ? 'is-active ' : ''}`}
+        data-testid='modal'
       >
         <div className="modal__wrapper">
           <div className="modal__overlay" data-close-modal="" onClick={onModalClose}>
@@ -183,6 +186,7 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
                   </label>
                   <input
                     className="form-review__input form-review__input--name"
+                    data-testid="user-name"
                     id="user-name"
                     type="text"
                     autoComplete="off"
@@ -206,6 +210,7 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
                           name="rate"
                           type="radio"
                           id={`star-${mark}`}
+                          data-testid={`star-${mark}`}
                           value={mark}
                           checked={rating === mark}
                           disabled={isPosting}
@@ -258,7 +263,11 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
                 disabled={isPosting}
               >
               </textarea>
-              <button className="button button--medium-20 form-review__button" type="submit">
+              <button
+                className="button button--medium-20 form-review__button"
+                type="submit"
+                data-testid='submit-button'
+              >
                 {!isPosting ? 'Отправить отзыв' : 'Отправляем...'}
               </button>
             </form>

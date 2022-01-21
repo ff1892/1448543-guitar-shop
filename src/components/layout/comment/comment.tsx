@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { CommentGet } from '../../../types/data';
 import { getDateString, hasInput } from '../../../utils/common';
 import { StarsRating } from '../../components';
@@ -51,12 +52,12 @@ function Comment ({userComment}: CommentProps): JSX.Element {
       </div>
       { reviewTitles.map(({data, label}) => (
         hasInput(data) &&
-          <>
+          <Fragment key={label}>
             <h4 className="review__title title title--lesser">{`${label}:`}</h4>
             <p className="review__value">
               {data}
             </p>
-          </>
+          </Fragment>
       ))}
     </div>
   );

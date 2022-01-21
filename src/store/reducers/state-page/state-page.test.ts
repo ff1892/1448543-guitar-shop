@@ -3,7 +3,7 @@ import { changePage } from '../../actions';
 import { statePage } from './state-page';
 
 const state: StatePage = {
-  page: 1,
+  page: null,
 };
 
 describe('Reducer: statePage', () => {

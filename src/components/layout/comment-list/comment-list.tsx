@@ -59,12 +59,14 @@ function CommentList ({ comments }: CommentListProps): JSX.Element {
         <button
           className="button button--medium reviews__more-button"
           onClick={onMoreButtonClick}
+          data-testid='show-more'
         >
         Показать еще отзывы
         </button> }
         { hasComments &&
           <a className="button button--up button--red-border button--big reviews__up-button"
             href="#top"
+            data-testid='up-link'
             style={{
               zIndex: '2',
             }}

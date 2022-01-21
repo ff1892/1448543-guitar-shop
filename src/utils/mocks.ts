@@ -22,8 +22,8 @@ export const makeFakeCommentPost = (): CommentPost => ({
   guitarId: datatype.number(),
 });
 
-export const makeFakeComments = (): CommentGet[] => (
-  new Array(3).fill(null).map(makeFakeComment)
+export const makeFakeComments = (count: number): CommentGet[] => (
+  new Array(count).fill(null).map(makeFakeComment)
 );
 
 export const makeFakeGuitarNoComments = (): GuitarNoComments => ({
@@ -44,7 +44,7 @@ export const makeFakeGuitarsNoComments = (): GuitarNoComments[] => (
 
 export const makeFakeGuitar = (): Guitar => ({
   ...makeFakeGuitarNoComments(),
-  comments: makeFakeComments(),
+  comments: makeFakeComments(3),
 });
 
 export const makeFakeGuitars = (): Guitar[] => (
