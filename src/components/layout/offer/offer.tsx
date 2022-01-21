@@ -17,7 +17,7 @@ function Offer ({ offer }: OfferProps): JSX.Element {
   const sortedComments = sortCommentsByDate(comments);
 
   return (
-    <main className="page-content">
+    <main className="page-content" data-testid='page-content'>
       <div className="container">
         <OfferNavigation name={name} id={id} />
         <OfferDetails offer={offer}/>
