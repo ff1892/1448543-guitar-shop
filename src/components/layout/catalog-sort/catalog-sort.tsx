@@ -3,6 +3,8 @@ import { Sort } from '../../../types/components';
 import { ButtonLabel, HistoryRoute } from '../../../constants';
 import { useDispatch } from 'react-redux';
 import { changeSort } from '../../../store/actions';
+import { changePage } from '../../../store/actions';
+import { INITIAL_PAGE } from '../../../constants';
 import { useHistory } from 'react-router-dom';
 import useQuery from '../../../hooks/use-query/use-query';
 
@@ -42,6 +44,7 @@ function CatalogSort(): JSX.Element {
     if (newSort.order) {
       query.set(HistoryRoute.Order, newSort.order);
     }
+    dispatch(changePage(INITIAL_PAGE));
     history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
   };
 
@@ -55,6 +58,7 @@ function CatalogSort(): JSX.Element {
     setSort(newSort);
     query.set(HistoryRoute.Order, newSort.order);
     query.set(HistoryRoute.Sort, newSort.type);
+    dispatch(changePage(INITIAL_PAGE));
     history.push({ pathname: HistoryRoute.InitialPagePathname, search: query.toString() });
   };
 
