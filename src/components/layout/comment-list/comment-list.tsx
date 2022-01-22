@@ -1,4 +1,7 @@
-import { useState, MouseEvent} from 'react';
+import { useState, MouseEvent, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { UploadStatus } from '../../../constants';
+import { getCommentStatus } from '../../../store/reducers/data-comment/selectors';
 import { CommentGet } from '../../../types/data';
 import { Comment, ModalComment, ModalWrapper } from '../../components';
 
@@ -13,6 +16,8 @@ const commentsSettings = {
 };
 
 function CommentList ({ comments }: CommentListProps): JSX.Element {
+
+  const commentStatus = useSelector(getCommentStatus);
 
   const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
   const openModal = () => setIsVisibleModal(true);
@@ -36,6 +41,12 @@ function CommentList ({ comments }: CommentListProps): JSX.Element {
     evt.preventDefault();
     openModal();
   };
+
+  useEffect(() => {
+    if (commentStatus === UploadStatus.Completed) {
+      setStep(initialStep);
+    }
+  }, [commentStatus, initialStep]);
 
   return (
     <>

@@ -1,3 +1,4 @@
+import { AppRoute } from '../../../constants';
 import { Guitar } from '../../../types/data';
 import {
   StarsRating,
@@ -52,7 +53,7 @@ function OfferDetails ({ offer }: OfferDetailsProps): JSX.Element {
         </p>
         <a
           className="button button--red button--big product-container__button"
-          href="/"
+          href={AppRoute.Cart}
         >
           Добавить в корзину
         </a>
