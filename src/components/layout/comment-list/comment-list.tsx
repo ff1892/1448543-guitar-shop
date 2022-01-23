@@ -20,8 +20,8 @@ function CommentList ({ comments }: CommentListProps): JSX.Element {
   const commentStatus = useSelector(getCommentStatus);
 
   const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
-  const openModal = () => setIsVisibleModal(true);
-  const closeModal = () => setIsVisibleModal(false);
+  const onModalOpen = () => setIsVisibleModal(true);
+  const onModalClose = () => setIsVisibleModal(false);
 
   const { initialStep, commentsToShow } = commentsSettings;
   const [step, setStep] = useState<number>(initialStep);
@@ -39,7 +39,7 @@ function CommentList ({ comments }: CommentListProps): JSX.Element {
 
   const onPostCommentClick = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
-    openModal();
+    onModalOpen();
   };
 
   useEffect(() => {
@@ -88,7 +88,7 @@ function CommentList ({ comments }: CommentListProps): JSX.Element {
       <ModalWrapper isVisibleChild={isVisibleModal}>
         <ModalComment
           isVisible={isVisibleModal}
-          closeModal={closeModal}
+          onModalClose={onModalClose}
         />
       </ModalWrapper>
     </>

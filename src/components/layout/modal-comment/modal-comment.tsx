@@ -21,7 +21,7 @@ import { ButtonCross } from '../../components';
 
 type ModalCommentProps = {
   isVisible: boolean,
-  closeModal: () => void;
+  onModalClose: () => void;
 };
 
 const ratingLabel: { [key: string]: string } = {
@@ -34,7 +34,7 @@ const ratingLabel: { [key: string]: string } = {
 
 const ratingArray: number[] = new Array(MAX_RATING).fill(null).map((_value, index) => MAX_RATING - index);
 
-function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element {
+function ModalComment({ isVisible, onModalClose }: ModalCommentProps): JSX.Element {
 
   const currentOffer = useSelector(getCurrentOffer);
   const commentStatus = useSelector(getCommentStatus);
@@ -121,18 +121,18 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
     dispatch(commentPostAction(comment));
   };
 
-  const onModalClose = useCallback(() => {
-    closeModal();
+  const handleModalClose = useCallback(() => {
+    onModalClose();
     dispatch(changeCommentStatus(UploadStatus.Unknown));
     resetForm();
-  }, [closeModal, dispatch]);
+  }, [onModalClose, dispatch]);
 
   const onEscKeyDown = useCallback(
     (evt: KeyboardEvent) => {
       if (evt.code === 'Escape') {
-        onModalClose();
+        handleModalClose();
       }
-    }, [onModalClose]);
+    }, [handleModalClose]);
 
   useEffect(() => {
     if (isCompleted) {
@@ -155,7 +155,7 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
         data-testid='modal'
       >
         <div className="modal__wrapper">
-          <div className="modal__overlay" data-close-modal="" onClick={onModalClose}>
+          <div className="modal__overlay" data-close-modal="" onClick={handleModalClose}>
           </div>
           <div className="modal__content">
             <h2 className="modal__header modal__header--review title title--medium">
@@ -271,7 +271,7 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
                 {!isPosting ? 'Отправить отзыв' : 'Отправляем...'}
               </button>
             </form>
-            <ButtonCross onButtonClick={onModalClose}/>
+            <ButtonCross onButtonClick={handleModalClose}/>
           </div>
         </div>
       </div>
@@ -279,7 +279,7 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
         <div className="modal__wrapper">
           <div
             className="modal__overlay" data-close-modal
-            onClick={onModalClose}
+            onClick={handleModalClose}
           >
           </div>
           <div className="modal__content">
@@ -289,12 +289,12 @@ function ModalComment({ isVisible, closeModal }: ModalCommentProps): JSX.Element
             <p className="modal__message">Спасибо за ваш отзыв!</p>
             <div className="modal__button-container modal__button-container--review">
               <button className="button button--small modal__button modal__button--review"
-                onClick={onModalClose}
+                onClick={handleModalClose}
               >
                 К покупкам!
               </button>
             </div>
-            <ButtonCross onButtonClick={onModalClose} />
+            <ButtonCross onButtonClick={handleModalClose} />
           </div>
         </div>
       </div>

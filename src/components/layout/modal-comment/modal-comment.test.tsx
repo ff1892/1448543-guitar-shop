@@ -31,7 +31,7 @@ describe('Component: CommentList', () => {
   const fakeModal = (
     <Provider store={store}>
       <Router history={history}>
-        <ModalComment isVisible closeModal={fakeCallback} />
+        <ModalComment isVisible onModalClose={fakeCallback} />
       </Router>
     </Provider>
   );
