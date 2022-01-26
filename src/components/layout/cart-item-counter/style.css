@@ -1,0 +1,16 @@
+.cart-item__quantity {
+  position: relative;
+}
+
+.counter__warning {
+  display: block;
+  padding-right: 5px;
+  font-size: 10px;
+  line-height: 15px;
+  color: #eb5555;
+  position: absolute;
+  top: 35px;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}

@@ -1,8 +1,12 @@
+import { MouseEvent } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getFormattedPrice } from '../../../utils/common';
+import { getFormattedPrice, getIsInCart } from '../../../utils/common';
 import { Guitar } from '../../../types/data';
 import { StarsRating } from '../../components';
 import { AppRoute } from '../../../constants';
+import { getOffersInCart } from '../../../store/reducers/data-cart/selectors';
+
 
 type OfferCardProps = {
   offer: Guitar,
@@ -25,6 +29,12 @@ function OfferCard({ offer }: OfferCardProps): JSX.Element {
   } = offer;
 
   const formattedPrice = getFormattedPrice(price);
+  const cartOffers = useSelector(getOffersInCart);
+  const isInCart = getIsInCart(id, cartOffers);
+
+  const onBuyButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+  };
 
   return(
     <div className="product-card" data-testid='offer card'>
@@ -51,9 +61,21 @@ function OfferCard({ offer }: OfferCardProps): JSX.Element {
         <Link className="button button--mini" to={`${AppRoute.Guitars}/${id}`}>
           Подробнее
         </Link>
-        <Link className="button button--red button--mini button--add-to-cart" to={AppRoute.Cart}>
-          Купить
-        </Link>
+        { isInCart ?
+          <Link
+            className="button button--red-border button--mini button--in-cart"
+            to={AppRoute.Cart}
+          >
+            В Корзине
+          </Link>
+          :
+          <Link
+            className="button button--red button--mini button--add-to-cart"
+            to={AppRoute.Cart}
+            onClick={onBuyButtonClick}
+          >
+            Купить
+          </Link> }
       </div>
     </div>
   );

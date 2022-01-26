@@ -96,3 +96,10 @@ export const changeCommentStatus = createAction(
     payload: commentStatus,
   }),
 );
+
+export const updateCartOffers = createAction(
+  ActionType.UpdateCartOffers,
+  (offer: Guitar, count: number) => ({
+    payload: {offer, count},
+  }),
+);

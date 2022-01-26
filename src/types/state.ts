@@ -40,4 +40,8 @@ export type DataComment = {
   commentStatus: string,
 };
 
+export type DataCart = {
+  cartOffers: Guitar[],
+};
+
 export type State = RootState;

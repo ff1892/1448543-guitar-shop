@@ -20,6 +20,7 @@ export enum ActionType {
   LoadCurrentOffer = 'data/LoadCurrentOffer',
   LoadCurrentOfferError = 'data/LoadCurrentOfferError',
   ChangeUploadCommentStatus = 'data/ChangeUploadCommentStatus',
+  UpdateCartOffers = 'data/UpdateCartOffers',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

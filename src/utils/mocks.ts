@@ -89,5 +89,8 @@ export const getFakeStore = (): State => {
     DATA_COMMENT: {
       commentStatus: 'UNKNOWN',
     },
+    DATA_CART: {
+      cartOffers: fakeGuitars,
+    },
   };
 };

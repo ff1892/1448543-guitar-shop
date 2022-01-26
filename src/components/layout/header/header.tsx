@@ -1,13 +1,17 @@
-import { AppRoute } from '../../../constants';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getOffersInCart } from '../../../store/reducers/data-cart/selectors';
 import { SearchForm } from '../../components';
-import { INITIAL_PAGE } from '../../../constants';
+import { AppRoute, INITIAL_PAGE } from '../../../constants';
 
 type HeaderProps = {
   isMainPage?: boolean,
 }
 
 function Header ({ isMainPage = false }: HeaderProps ): JSX.Element {
+
+  const offersCount = useSelector(getOffersInCart).length;
+
   return (
     <header className="header" id="header">
       <div className="container header__wrapper">
@@ -45,7 +49,10 @@ function Header ({ isMainPage = false }: HeaderProps ): JSX.Element {
             <use xlinkHref="#icon-basket"></use>
           </svg>
           <span className="visually-hidden">Перейти в корзину</span>
-          <span className="header__cart-count">2</span>
+          { !!offersCount &&
+            <span className="header__cart-count">
+              {offersCount}
+            </span> }
         </Link>
       </div>
     </header>

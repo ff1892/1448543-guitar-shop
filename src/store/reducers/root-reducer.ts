@@ -5,6 +5,7 @@ import { stateSort } from './state-sort/state-sort';
 import { statePage } from './state-page/state-page';
 import { dataCurrentOffer } from './data-current-offer/data-current-offer';
 import { dataComment } from './data-comment/data-comment';
+import { dataCart } from './data-cart/data-cart';
 
 export enum StoreNameSpace {
   Offers = 'DATA_OFFERS',
@@ -13,6 +14,7 @@ export enum StoreNameSpace {
   Page = 'STATE_PAGE',
   CurrentOffer = 'DATA_CURRENT_OFFER',
   Comment = 'DATA_COMMENT',
+  Cart = 'DATA_CART'
 }
 
 export const rootReducer = combineReducers({
@@ -22,6 +24,7 @@ export const rootReducer = combineReducers({
   [StoreNameSpace.Page]: statePage,
   [StoreNameSpace.CurrentOffer]: dataCurrentOffer,
   [StoreNameSpace.Comment]: dataComment,
+  [StoreNameSpace.Cart]: dataCart,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

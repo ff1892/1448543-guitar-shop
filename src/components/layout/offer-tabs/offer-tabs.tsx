@@ -1,7 +1,6 @@
 import { useState, MouseEvent } from 'react';
 import { Guitar } from '../../../types/data';
-import { capitalizeString } from '../../../utils/common';
-import { GuitarType } from '../../../constants';
+import { getFormattedType } from '../../../utils/common';
 
 type OfferTabsProps = {
   offer: Guitar,
@@ -41,7 +40,7 @@ function OfferTabs ({ offer }: OfferTabsProps): JSX.Element {
     description,
   } = offer;
 
-  const formattedType = GuitarType[capitalizeString(type)];
+  const formattedType = getFormattedType(type);
 
   return (
     <div className="tabs">

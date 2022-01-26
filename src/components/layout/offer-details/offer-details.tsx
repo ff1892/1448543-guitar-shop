@@ -1,5 +1,6 @@
 import { AppRoute } from '../../../constants';
 import { Guitar } from '../../../types/data';
+import { getFormattedPrice } from '../../../utils/common';
 import {
   StarsRating,
   OfferTabs
@@ -25,7 +26,7 @@ function OfferDetails ({ offer }: OfferDetailsProps): JSX.Element {
   } = offer;
 
   const commentsCount = comments.length;
-  const formattedPrice = price.toLocaleString();
+  const formattedPrice = getFormattedPrice(price);
 
   return (
     <div className="product-container">
@@ -49,7 +50,7 @@ function OfferDetails ({ offer }: OfferDetailsProps): JSX.Element {
       <div className="product-container__price-wrapper">
         <p className="product-container__price-info product-container__price-info--title">Цена:</p>
         <p className="product-container__price-info product-container__price-info--value">
-          {formattedPrice} ₽
+          {formattedPrice}
         </p>
         <a
           className="button button--red button--big product-container__button"

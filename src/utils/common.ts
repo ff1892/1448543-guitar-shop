@@ -1,10 +1,25 @@
 import { RefObject } from 'react';
 import { Sort, FilterGuitarType, FilterPrice } from '../types/components';
-import { ButtonLabel, QueryRoute, OFFERS_TO_SHOW, NO_INPUT } from '../constants';
-import { CommentGet, GuitarNoComments } from '../types/data';
+
+import {
+  ButtonLabel,
+  QueryRoute,
+  GuitarType,
+  OFFERS_TO_SHOW,
+  NO_INPUT
+} from '../constants';
+
+import { CommentGet,
+  GuitarNoComments,
+  Guitar
+} from '../types/data';
 
 export const getFormattedPrice = (price: number): string => (
   `${price.toLocaleString() } ₽`
+);
+
+export const getFormattedType = (type: string): string => (
+  GuitarType[capitalizeString(type)]
 );
 
 export const getIsStringMatchesTypes =
@@ -63,7 +78,6 @@ export const getQuery = (query: string, state: string[]): string => {
 
 export const getPageQuery = (query: number): string => `&_start=${(query - 1) * OFFERS_TO_SHOW}&_limit=${OFFERS_TO_SHOW}`;
 
-
 export const validatePrice = (password: string): string => {
   const numberReg = /^[0-9]*$/;
   if (numberReg.test(password)) {
@@ -114,3 +128,49 @@ export const getInputText =
   };
 
 export const hasInput = (input: string): boolean => input !== NO_INPUT;
+
+export const updateString = (string: string, count: number): string => (
+  (parseInt(string, 10) + count).toString()
+);
+
+export const getIsInCart = (offerId: number, offers: Guitar[]): boolean => (
+  offers.findIndex(({ id }) => id === offerId) >= 0
+);
+
+export const getUniqueOffers = (offers: Guitar[]): Guitar[] => [...new Set(offers)];
+
+export const sortOffersById = (offers: Guitar[]) => (
+  [...offers].sort((firstOffer, secondOffer) => firstOffer.id - secondOffer.id)
+);
+
+export const getSameOffersCount = (offers: Guitar[], offerId: number): number => (
+  offers.filter(({ id }) => id === offerId).length
+);
+
+export const addOffer = (offers: Guitar[], currentOffer: Guitar): Guitar[] => (
+  [...offers, currentOffer]
+);
+
+export const removeOffer = (offers: Guitar[], currentOffer: Guitar): Guitar[] => {
+  const index = offers.findIndex(({ id }) => id === currentOffer.id);
+  return [...offers.slice(0, index), ...offers.slice(index + 1)];
+};
+
+export const updateOffers =
+  (offers: Guitar[], currentOffer: Guitar, count: number): Guitar[] => {
+    const noCurrentOfferArray = offers.filter(({ id }) => id !== currentOffer.id);
+    const offersArray = new Array(count).fill(null).map(() => currentOffer);
+    return [...noCurrentOfferArray, ...offersArray];
+  };
+
+export const getOnCounterLeaveString =
+  (input: string, [minNum, maxNum]: number[]): string => {
+    const currentNum = parseInt(input, 10);
+    if (!input.length || currentNum < minNum) {
+      return minNum.toString();
+    }
+    if (currentNum > maxNum) {
+      return maxNum.toString();
+    }
+    return input;
+  };
