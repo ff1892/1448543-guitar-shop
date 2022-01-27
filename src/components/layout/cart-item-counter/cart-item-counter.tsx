@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getOffersInCart } from '../../../store/reducers/data-cart/selectors';
 import { updateCartOffers } from '../../../store/actions';
 import { Guitar } from '../../../types/data';
+import { OrderCount } from '../../../constants';
 
 import {
   getSameOffersCount,
@@ -13,17 +14,18 @@ import {
 
 type CartItemCounterProps = {
   offer: Guitar,
+  onDeleteClick: (evt: MouseEvent<HTMLButtonElement>) => void,
 };
 
 const CounterSettings = {
-  MinNum: 1,
-  MaxNum: 3,
-  MinStr: '1',
-  MaxStr: '3',
+  MinNum: OrderCount.Min,
+  MaxNum: OrderCount.Max,
+  MinStr: OrderCount.Min.toString(),
+  MaxStr: OrderCount.Max.toString(),
 } as const;
 
 
-function CartItemCounter ({ offer }: CartItemCounterProps): JSX.Element {
+function CartItemCounter ({ offer, onDeleteClick }: CartItemCounterProps): JSX.Element {
 
   const dispatch = useDispatch();
 
@@ -54,6 +56,7 @@ function CartItemCounter ({ offer }: CartItemCounterProps): JSX.Element {
       return;
     }
     if (isMinNum) {
+      onDeleteClick(evt);
       return;
     }
     setIsOnLeaveLaunched(false);
@@ -139,8 +142,8 @@ function CartItemCounter ({ offer }: CartItemCounterProps): JSX.Element {
           Число <br /> от {CounterSettings.MinNum} до {CounterSettings.MaxNum}
         </span> }
       { isMaxNum &&
-        <span className="counter__warning">
-          Всё, что есть в наличии
+        <span className="counter__warning counter__warning--store">
+          Это всё, что есть в наличии
         </span> }
     </div>
   );

@@ -8,6 +8,7 @@ type ModalWrapperProps = {
 };
 
 function ModalWrapper({ children, isVisibleChild }: ModalWrapperProps): JSX.Element {
+
   return(
     <FocusLock disabled={!isVisibleChild}>
       <RemoveScroll enabled={isVisibleChild}>

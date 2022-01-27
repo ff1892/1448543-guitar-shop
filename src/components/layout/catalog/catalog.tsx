@@ -2,7 +2,7 @@ import {
   PageNavigation,
   CatalogMainSection
 } from '../../components';
-import { AppRoute, INITIAL_PAGE } from '../../../constants';
+import { AppRoute } from '../../../constants';
 
 
 function Catalog (): JSX.Element {
@@ -10,8 +10,8 @@ function Catalog (): JSX.Element {
   const { title, linkData } = {
     title: 'Каталог гитар',
     linkData: [
-      { label: 'Главная', link: AppRoute.Main },
-      { label: 'Каталог', link: `${AppRoute.Catalog}${AppRoute.Page}${INITIAL_PAGE}` },
+      { label: 'Главная', link: AppRoute.Start },
+      { label: 'Каталог', link: AppRoute.Start },
     ],
   };
 

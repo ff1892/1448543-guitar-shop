@@ -10,7 +10,6 @@ export { default as FilterTypeItem } from './layout/filter-type-item/filter-type
 export { default as FilterStrings } from './layout/filter-strings/filter-strings';
 export { default as FilterStringsItem } from './layout/filter-strings-item/filter-strings-item';
 export { default as FilterPrice } from './layout/filter-price/filter-price';
-export { default as CatalogBreadcrumbs } from './layout/catalog-breadcrumbs/catalog-breadcrumbs';
 export { default as CatalogSort } from './layout/catalog-sort/catalog-sort';
 export { default as CatalogPagination } from './layout/catalog-pagination/catalog-pagination';
 export { default as CatalogMainSection } from './layout/catalog-main-section/catalog-main-section';
@@ -35,3 +34,7 @@ export { default as CartItem } from './layout/cart-item/cart-item';
 export { default as CartItemCounter } from './layout/cart-item-counter/cart-item-counter';
 export { default as CartCoupon } from './layout/cart-coupon/cart-coupon';
 export { default as CartTotal } from './layout/cart-total/cart-total';
+export { default as CartEmpty } from './layout/cart-empty/cart-empty';
+export { default as ModalCartAdd } from './layout/modal-cart-add/modal-cart-add';
+export { default as ModalCartRemove } from './layout/modal-cart-remove/modal-cart-remove';
+export { default as ModalDetails } from './layout/modal-details/modal-details';

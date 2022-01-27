@@ -156,6 +156,10 @@ export const removeOffer = (offers: Guitar[], currentOffer: Guitar): Guitar[] =>
   return [...offers.slice(0, index), ...offers.slice(index + 1)];
 };
 
+export const removeSameOffers = (offers: Guitar[], currentOffer: Guitar): Guitar[] => (
+  offers.filter(({ id }) => id !== currentOffer.id)
+);
+
 export const updateOffers =
   (offers: Guitar[], currentOffer: Guitar, count: number): Guitar[] => {
     const noCurrentOfferArray = offers.filter(({ id }) => id !== currentOffer.id);

@@ -17,6 +17,7 @@ export enum AppRoute {
   Main = '/',
   Catalog = '/catalog',
   InitialPage = '/page_1',
+  Start = '/catalog/page_1',
   Page = '/page_',
   Guitars= '/guitars',
   About='/about',
@@ -84,4 +85,9 @@ export enum UploadStatus {
   Posting = 'POSTING',
   Completed = 'COMPLETED',
   Error = 'ERROR',
+}
+
+export enum OrderCount {
+  Min = 1,
+  Max = 99,
 }

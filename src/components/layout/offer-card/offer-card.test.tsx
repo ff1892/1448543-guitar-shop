@@ -14,10 +14,14 @@ const store = mockStore({});
 
 describe('Component: OfferCard', () => {
   const fakeGuitar = makeFakeGuitar();
+  const fakeCallback = jest.fn();
   const fakeOffer = (
     <Provider store={store}>
       <Router history={history}>
-        <OfferCard offer={fakeGuitar} />;
+        <OfferCard
+          offer={fakeGuitar}
+          onBuyButtonClick={fakeCallback}
+        />;
       </Router>
     </Provider>
   );

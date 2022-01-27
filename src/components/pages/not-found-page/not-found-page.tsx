@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../../constants';
 import './style.css';
 
 function NotFoundPage(): JSX.Element {
@@ -17,7 +18,7 @@ function NotFoundPage(): JSX.Element {
               <br />
               Страница не найдена
             </h1>
-            <Link className="not-found__link" to="/" title="Main Page">
+            <Link className="not-found__link" to={AppRoute.Start} title="Main Page">
                 Перейти на главную страницу
             </Link>
           </div>

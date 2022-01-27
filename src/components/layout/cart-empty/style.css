@@ -1,0 +1,21 @@
+.cart-empty {
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-empty__wrapper {
+  text-align: center;
+}
+
+.cart-empty__status {
+  font-size: 35px;
+  line-height: 40px;
+}
+
+.cart-empty__link {
+  font-size: 18px;
+  border-bottom: 1px solid #383838;
+}

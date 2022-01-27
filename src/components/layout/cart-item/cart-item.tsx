@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { getOffersInCart } from '../../../store/reducers/data-cart/selectors';
 import { Guitar } from '../../../types/data';
@@ -11,9 +12,10 @@ import {
 
 type CartItemProps = {
   offer: Guitar,
+  onModalOpen: (offer: Guitar) => void;
 };
 
-function CartItem ({ offer }: CartItemProps): JSX.Element {
+function CartItem ({ offer, onModalOpen }: CartItemProps): JSX.Element {
 
   const {
     previewImg,
@@ -31,14 +33,24 @@ function CartItem ({ offer }: CartItemProps): JSX.Element {
   const formattedPrice = getFormattedPrice(price);
   const formattedTotalPrice = getFormattedPrice(price * sameOffersCount);
 
+  const onDeleteClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    onModalOpen(offer);
+  };
+
   return (
     <div className="cart-item">
-      <button className="cart-item__close-button button-cross" type="button" aria-label="Удалить">
+      <button
+        className="cart-item__close-button button-cross"
+        type="button"
+        aria-label="Удалить"
+        onClick={onDeleteClick}
+      >
         <span className="button-cross__icon"></span>
         <span className="cart-item__close-button-interactive-area"></span>
       </button>
       <div className="cart-item__image">
-        <img src={`../${previewImg}`}
+        <img
+          src={`../${previewImg}`}
           alt={`${formattedType} ${name}`}
           width="55"
           height="130"
@@ -50,7 +62,10 @@ function CartItem ({ offer }: CartItemProps): JSX.Element {
         <p className="product-info__info">{formattedType}, {stringCount} струнная</p>
       </div>
       <div className="cart-item__price">{formattedPrice}</div>
-      <CartItemCounter offer={offer} />
+      <CartItemCounter
+        offer={offer}
+        onDeleteClick={onDeleteClick}
+      />
       <div className="cart-item__price-total">{formattedTotalPrice}</div>
     </div>
   );

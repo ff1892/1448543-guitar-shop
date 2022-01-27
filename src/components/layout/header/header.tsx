@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getOffersInCart } from '../../../store/reducers/data-cart/selectors';
 import { SearchForm } from '../../components';
-import { AppRoute, INITIAL_PAGE } from '../../../constants';
+import { AppRoute } from '../../../constants';
 
 type HeaderProps = {
   isMainPage?: boolean,
@@ -26,7 +26,7 @@ function Header ({ isMainPage = false }: HeaderProps ): JSX.Element {
             <li>
               <Link
                 className={`link main-nav__link ${isMainPage ? 'link--current' : ''}`}
-                to={`${AppRoute.Catalog}${AppRoute.Page}${INITIAL_PAGE}`}
+                to={AppRoute.Start}
               >
                 Каталог
               </Link>

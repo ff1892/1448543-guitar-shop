@@ -1,6 +1,6 @@
 import { Guitar } from '../../../types/data';
 import { sortCommentsByDate } from '../../../utils/common';
-import { AppRoute, INITIAL_PAGE } from '../../../constants';
+import { AppRoute } from '../../../constants';
 
 import {
   PageNavigation,
@@ -20,8 +20,8 @@ function Offer ({ offer }: OfferProps): JSX.Element {
   const { title, linkData } = {
     title: name,
     linkData: [
-      { label: 'Главная', link: AppRoute.Main },
-      { label: 'Каталог', link: `${AppRoute.Catalog}${AppRoute.Page}${INITIAL_PAGE}` },
+      { label: 'Главная', link: AppRoute.Start },
+      { label: 'Каталог', link: AppRoute.Start },
       { label: name, link: `${AppRoute.Guitars}/${id}` },
     ],
   };

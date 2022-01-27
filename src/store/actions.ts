@@ -97,9 +97,33 @@ export const changeCommentStatus = createAction(
   }),
 );
 
+export const addCartOffer = createAction(
+  ActionType.AddCartOffer,
+  (offer: Guitar) => ({
+    payload: offer,
+  }),
+);
+
+export const removeCartOffer = createAction(
+  ActionType.RemoveCartOffer,
+  (offer: Guitar) => ({
+    payload: offer,
+  }),
+);
+
+export const removeSameCartOffers = createAction(
+  ActionType.RemoveSameCartOffers,
+  (offer: Guitar) => ({
+    payload: offer,
+  }),
+);
+
 export const updateCartOffers = createAction(
   ActionType.UpdateCartOffers,
   (offer: Guitar, count: number) => ({
     payload: {offer, count},
   }),
 );
+
+export const clearCart = createAction(ActionType.ClearCart);
+
