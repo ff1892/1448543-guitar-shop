@@ -1,4 +1,4 @@
-import { Guitar, GuitarNoComments } from './data';
+import { Guitar, GuitarNoComments, Coupon } from './data';
 import { Sort, FilterPrice } from './components';
 import { RootState } from '../store/reducers/root-reducer';
 
@@ -42,6 +42,12 @@ export type DataComment = {
 
 export type DataCart = {
   cartOffers: Guitar[],
+};
+
+export type DataCoupon = {
+  discount: number;
+  coupon: Coupon,
+  couponStatus: string,
 };
 
 export type State = RootState;

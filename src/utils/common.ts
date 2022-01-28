@@ -178,3 +178,7 @@ export const getOnCounterLeaveString =
     }
     return input;
   };
+
+export const getTotalPrice = (offers: Guitar[]): number => (
+  offers.reduce((prevOffer, currentOffer) => prevOffer + currentOffer.price, 0)
+);

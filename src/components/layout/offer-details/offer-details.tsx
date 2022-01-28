@@ -12,6 +12,7 @@ import {
   ModalCartAdd,
   ModalWrapper
 } from '../../components';
+import { Link } from 'react-router-dom';
 
 type OfferDetailsProps = {
   offer: Guitar,
@@ -81,10 +82,12 @@ function OfferDetails ({ offer }: OfferDetailsProps): JSX.Element {
             {isMaxCount ? 'Товар закончился' : 'Добавить в корзину'}
           </a>
           {isMaxCount &&
-          <span className='out-of-stock__warning'>
+            <Link className='out-of-stock__warning' to={AppRoute.Cart}>
+              <span>
             В вашей корзине сейчас {sameOffersCount} шт., <br/>
             доступных для заказа
-          </span>}
+              </span>
+            </Link>}
         </div>
       </div>
       {

@@ -92,5 +92,10 @@ export const getFakeStore = (): State => {
     DATA_CART: {
       cartOffers: fakeGuitars,
     },
+    DATA_COUPON: {
+      discount: 0,
+      coupon: null,
+      couponStatus: 'UNKNOWN',
+    },
   };
 };

@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
-import { Guitar, GuitarNoComments } from '../types/data';
+import { Guitar, GuitarNoComments, Coupon } from '../types/data';
 import { Sort, FilterPrice } from '../types/components';
 
 export const loadTotalCount = createAction(
@@ -126,4 +126,27 @@ export const updateCartOffers = createAction(
 );
 
 export const clearCart = createAction(ActionType.ClearCart);
+
+export const loadDiscount = createAction(
+  ActionType.LoadDiscount,
+  (discount: number) => ({
+    payload: discount,
+  }),
+);
+
+export const loadCoupon = createAction(
+  ActionType.LoadCoupon,
+  (coupon: Coupon) => ({
+    payload: coupon,
+  }),
+);
+
+export const changeCouponStatus = createAction(
+  ActionType.ChangeCouponStatus,
+  (couponStatus: string) => ({
+    payload: couponStatus,
+  }),
+);
+
+export const clearCoupon = createAction(ActionType.ClearCoupon);
 

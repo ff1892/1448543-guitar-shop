@@ -1,6 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DataCart } from '../../../types/state';
-// import { mockOffer, mockOffer2 } from '../../../mocks';
 
 import {
   removeOffer,
@@ -17,7 +16,6 @@ import {
 } from '../../actions';
 
 const initialState: DataCart = {
-  // cartOffers: [mockOffer, mockOffer2, mockOffer],
   cartOffers: [],
 };
 

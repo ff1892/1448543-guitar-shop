@@ -25,3 +25,9 @@ export type CommentGet = {
 };
 
 export type CommentPost = Omit<CommentGet, 'id' | 'createAt'>;
+
+export type Coupon = string | null;
+
+export type CouponPost = {
+  coupon: Coupon,
+};
