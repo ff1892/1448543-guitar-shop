@@ -4,8 +4,7 @@ import axios, {
   AxiosError
 } from 'axios';
 
-// const BACKEND_URL = 'https://accelerator-guitar-shop-api-v1.glitch.me/';
-const BACKEND_URL = 'http://localhost:3001/';
+const BACKEND_URL = 'https://accelerator-guitar-shop-api-v1.glitch.me/';
 const REQUEST_TIMEOUT = 5000;
 
 
