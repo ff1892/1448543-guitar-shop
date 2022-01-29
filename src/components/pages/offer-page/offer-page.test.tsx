@@ -37,6 +37,9 @@ describe('Component: PageOffer', () => {
           isCurrentOfferLoaded: true,
           isCurrentOfferError: false,
         },
+        DATA_CART: {
+          cartOffers: [fakeOffer],
+        },
       },
     );
 

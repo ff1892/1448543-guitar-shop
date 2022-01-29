@@ -28,8 +28,8 @@ export const makeFakeComments = (count: number): CommentGet[] => (
 
 export const makeFakeGuitarNoComments = (): GuitarNoComments => ({
   id: datatype.number(),
-  name: lorem.word(),
-  vendorCode: datatype.string(),
+  name: internet.userName(),
+  vendorCode: datatype.uuid(),
   type: commerce.product(),
   description: commerce.productDescription(),
   previewImg: internet.avatar(),

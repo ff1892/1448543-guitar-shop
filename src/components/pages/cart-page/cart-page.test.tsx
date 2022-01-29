@@ -8,10 +8,11 @@ import { State } from '../../../types/state';
 import { Action } from 'redux';
 
 import { screen, render } from '@testing-library/react';
-import MainPage from './main-page';
-import { makeFakeGuitars } from '../../../utils/mocks';
+import CartPage from './cart-page';
+import { makeFakeGuitar } from '../../../utils/mocks';
+import { INITIAL_DISCOUNT, UploadStatus } from '../../../constants';
 
-const fakeGuitars = makeFakeGuitars();
+const fakeGuitar = makeFakeGuitar();
 const api = createApi();
 const middlewares = [thunk.withExtraArgument(api)];
 
@@ -23,49 +24,34 @@ const mockStore = configureMockStore<
 
 const history = createMemoryHistory();
 const store = mockStore({
+  DATA_CART: {
+    cartOffers: [fakeGuitar],
+  },
+  DATA_COUPON: {
+    discount: INITIAL_DISCOUNT,
+    coupon: null,
+    couponStatus: UploadStatus.Unknown,
+  },
   DATA_OFFERS: {
-    totalCount: 3,
-    allOffers: fakeGuitars,
-    isAllOffersLoaded: true,
-    isAllOffersError: false,
-    priceOffers: fakeGuitars,
-    isPriceOffersLoaded: true,
-    isPriceOffersError: false,
-    similiarOffers: fakeGuitars,
+    similiarOffers: [fakeGuitar],
     isSimiliarOffersLoaded: true,
     isSimiliarOffersError: false,
-  },
-  STATE_PAGE: {
-    page: 1,
-  },
-  STATE_SORT: {
-    sort: { type: '', order: '' },
-  },
-  STATE_FILTER: {
-    filterType: [],
-    filterStrings: [],
-    filterPrice: { minPrice: '', maxPrice: '' },
-  },
-  DATA_CART: {
-    cartOffers: [fakeGuitars[0]],
   },
 });
 
 
-describe('Component: MainPage', () => {
+describe('Component: CartPage', () => {
 
-  const fakeMainPage = (
+  const fakeCartPage = (
     <Provider store={store}>
       <Router history={history}>
-        <MainPage />;
+        <CartPage />;
       </Router>
     </Provider>
   );
 
-
   it('should render correctly', () => {
-    render(fakeMainPage);
-    expect(screen.getByTestId(/catalog main/i)).toBeInTheDocument();
-    expect(screen.getAllByAltText(/Логотип/i)).toHaveLength(2);
+    render(fakeCartPage);
+    expect(screen.getByTestId(/cart-page/i)).toBeInTheDocument();
   });
 });

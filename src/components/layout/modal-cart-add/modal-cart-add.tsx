@@ -69,7 +69,10 @@ function ModalCartAdd ({
 
   return (
     <>
-      <div className={`modal modal-for-ui-kit ${isVisible && isAddMode ? 'is-active ' : ''}`}>
+      <div
+        className={`modal modal-for-ui-kit ${isVisible && isAddMode ? 'is-active ' : ''}`}
+        data-testid="modal"
+      >
         <div className="modal__wrapper">
           <div className="modal__overlay" data-close-modal="" onClick={handleModalClose}>
           </div>
@@ -80,6 +83,7 @@ function ModalCartAdd ({
             <ModalDetails offer={offer} />
             <div className="modal__button-container">
               <button
+                data-testid="add-cart"
                 className="button button--red button--big modal__button modal__button--add"
                 type="button"
                 onClick={onAddButtonClick}
@@ -102,6 +106,7 @@ function ModalCartAdd ({
             <p className="modal__message">Товар успешно добавлен в корзину</p>
             <div className="modal__button-container modal__button-container--add">
               <button
+                data-testid="to-cart"
                 className="button button--small modal__button"
                 type="button"
                 onClick={onCartButtonClick}
@@ -111,6 +116,7 @@ function ModalCartAdd ({
               <button
                 className="button button--black-border button--small modal__button modal__button--right"
                 onClick={onProceedButtonClick}
+                data-testid="continue"
               >
                 Продолжить покупки
               </button>

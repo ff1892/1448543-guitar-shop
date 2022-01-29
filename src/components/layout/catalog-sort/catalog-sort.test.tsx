@@ -40,7 +40,7 @@ describe('Component: CatalogSort', () => {
     expect(dispatch).toBeCalledTimes(1);
   });
 
-  it('should dispach an action when user changes sort', () => {
+  it('should dispach sort and page actions when user changes sort', () => {
     const dispatch = jest.fn();
     const useDispatch = jest.spyOn(Redux, 'useDispatch');
     useDispatch.mockReturnValue(dispatch);
@@ -49,6 +49,6 @@ describe('Component: CatalogSort', () => {
     userEvent.click(screen.getByTestId(ButtonLabel.Rating));
     userEvent.click(screen.getByTestId(ButtonLabel.Ascending));
     userEvent.click(screen.getByTestId(ButtonLabel.Descending));
-    expect(dispatch).toBeCalledTimes(4);
+    expect(dispatch).toBeCalledTimes(8);
   });
 });

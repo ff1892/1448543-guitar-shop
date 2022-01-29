@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DataCoupon } from '../../../types/state';
-import { UploadStatus } from '../../../constants';
+import { UploadStatus, INITIAL_DISCOUNT } from '../../../constants';
 
 
 import {
@@ -11,7 +11,7 @@ import {
 } from '../../actions';
 
 const initialState: DataCoupon = {
-  discount: 0,
+  discount: INITIAL_DISCOUNT,
   coupon: null,
   couponStatus: UploadStatus.Unknown,
 };
@@ -28,7 +28,7 @@ export const dataCoupon = createReducer(initialState, (builder) => {
       state.couponStatus = action.payload;
     })
     .addCase(clearCoupon, (state, _action) => {
-      state.discount = 0;
+      state.discount = INITIAL_DISCOUNT;
       state.coupon = null;
       state.couponStatus = UploadStatus.Unknown;
     });

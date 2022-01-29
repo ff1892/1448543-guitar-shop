@@ -5,6 +5,8 @@ import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import Header from './header';
+import { makeFakeGuitar } from '../../../utils/mocks';
+const fakeGuitar = makeFakeGuitar();
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
@@ -13,6 +15,9 @@ const store = mockStore({
     similiarOffers: [],
     isSimiliarOffersLoaded: true,
     isSimiliarOffersError: false,
+  },
+  DATA_CART: {
+    cartOffers: [fakeGuitar],
   },
 });
 

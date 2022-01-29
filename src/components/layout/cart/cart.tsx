@@ -45,7 +45,11 @@ function Cart (): JSX.Element {
   };
 
   return (
-    <main className="page-content">
+    <main
+      className="page-content"
+      data-testid="cart-page"
+
+    >
       <div className="container">
         <PageNavigation title={title} linkData={linkData}/>
         { !hasOffers && <CartEmpty /> }

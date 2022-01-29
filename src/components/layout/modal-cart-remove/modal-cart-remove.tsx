@@ -36,7 +36,10 @@ function ModalCartRemove ({ offer, onModalClose, isVisibleModal }: ModalCartRemo
 
 
   return (
-    <div className={`modal modal-for-ui-kit ${isVisibleModal ? 'is-active': ''}`}>
+    <div
+      className={`modal modal-for-ui-kit ${isVisibleModal ? 'is-active': ''}`}
+      data-testid="modal"
+    >
       <div className="modal__wrapper">
         <div className="modal__overlay" data-close-modal onClick={onModalClose}>
         </div>
@@ -45,12 +48,14 @@ function ModalCartRemove ({ offer, onModalClose, isVisibleModal }: ModalCartRemo
           <ModalDetails offer={offer} />
           <div className="modal__button-container">
             <button
+              data-testid="delete-button"
               className="button button--small modal__button"
               onClick={onDeleteButtonClick}
             >
               Удалить товар
             </button>
             <button
+              data-testid="continue-button"
               className="button button--black-border button--small modal__button modal__button--right"
               onClick={onModalClose}
             >

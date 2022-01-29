@@ -5,6 +5,7 @@ export const OFFERS_TO_SHOW = 9;
 export const INITIAL_PAGE = 1;
 export const TOTAL_COUNT_HEADER = 'x-total-count';
 export const NO_INPUT = ' ';
+export const INITIAL_DISCOUNT = 0;
 
 export enum ApiRoute {
   Guitars = '/guitars',

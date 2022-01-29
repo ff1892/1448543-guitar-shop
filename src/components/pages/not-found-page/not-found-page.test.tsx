@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { Router, Switch, Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import NotFoundPage from './not-found-page';
+import { AppRoute } from '../../../constants';
 
 const history = createMemoryHistory();
 
@@ -23,7 +24,7 @@ describe('Component: NotFoundPage', () => {
     render(
       <Router history={history}>
         <Switch>
-          <Route path='/' exact>
+          <Route path={AppRoute.Start} exact>
             <h1>This is a main page</h1>
           </Route>
           <Route>

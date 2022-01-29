@@ -7,13 +7,18 @@ import { screen, render } from '@testing-library/react';
 import OfferList from './offer-list';
 import { makeFakeGuitars } from '../../../utils/mocks';
 
+const fakeGuitars = makeFakeGuitars();
+
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
-const store = mockStore({});
+const store = mockStore({
+  DATA_CART: {
+    cartOffers: [fakeGuitars[0]],
+  },
+});
 
 
-describe('Component: OfferCard', () => {
-  const fakeGuitars = makeFakeGuitars();
+describe('Component: OfferList', () => {
 
   const fakeOfferList = (
     <Provider store={store}>

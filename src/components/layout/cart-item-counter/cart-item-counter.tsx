@@ -105,7 +105,10 @@ function CartItemCounter ({ offer, onDeleteClick }: CartItemCounterProps): JSX.E
   );
 
   return (
-    <div className="quantity cart-item__quantity">
+    <div
+      className="quantity cart-item__quantity"
+      data-testid="counter"
+    >
       <button
         className="quantity__button"
         aria-label="Уменьшить количество"
@@ -121,7 +124,9 @@ function CartItemCounter ({ offer, onDeleteClick }: CartItemCounterProps): JSX.E
         type="number"
         id="2-count"
         name="2-count"
-        max="99"
+        data-testid="2-count"
+        min={CounterSettings.MinNum}
+        max={CounterSettings.MaxNum}
         placeholder={value}
         value={value}
         onChange={onInputCountChange}

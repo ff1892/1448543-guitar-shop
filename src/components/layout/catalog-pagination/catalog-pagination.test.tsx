@@ -10,7 +10,11 @@ const history = createMemoryHistory();
 
 describe('Component: CatalogPagination', () => {
 
-  const store = mockStore({});
+  const store = mockStore({
+    STATE_PAGE: {
+      page: null,
+    },
+  });
 
   const fakeCatalogPagination = (
     <Provider store={store}>

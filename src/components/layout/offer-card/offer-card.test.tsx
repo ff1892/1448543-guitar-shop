@@ -6,14 +6,19 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import { screen, render } from '@testing-library/react';
 import OfferCard from './offer-card';
 import { makeFakeGuitar } from '../../../utils/mocks';
+const fakeGuitar = makeFakeGuitar();
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
-const store = mockStore({});
+const store = mockStore({
+  DATA_CART: {
+    cartOffers: [fakeGuitar],
+  },
+});
 
 
 describe('Component: OfferCard', () => {
-  const fakeGuitar = makeFakeGuitar();
+
   const fakeCallback = jest.fn();
   const fakeOffer = (
     <Provider store={store}>

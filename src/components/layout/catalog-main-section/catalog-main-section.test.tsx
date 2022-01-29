@@ -42,6 +42,9 @@ const store = mockStore({
     filterStrings: [],
     filterPrice: { minPrice: '', maxPrice: '' },
   },
+  DATA_CART: {
+    cartOffers: [fakeGuitars[0]],
+  },
 });
 
 
